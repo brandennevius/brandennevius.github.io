@@ -293,7 +293,8 @@ a {
 .panel-card,
 .project-card,
 .contact-card,
-.blueprint-card {
+.blueprint-card,
+.portrait-card {
   border: 1px solid rgba(31, 28, 24, 0.08);
   border-radius: var(--radius-xl);
   background: var(--surface);
@@ -303,6 +304,28 @@ a {
 
 .panel-card {
   padding: 1.35rem;
+}
+
+.portrait-card {
+  margin: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(244, 239, 230, 0.94)),
+    var(--surface);
+}
+
+.portrait-card img {
+  width: 100%;
+  aspect-ratio: 5 / 6;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.portrait-card figcaption {
+  padding: 1rem 1.15rem 1.2rem;
+  color: var(--muted);
+  font-size: 0.96rem;
+  line-height: 1.6;
 }
 
 .panel-primary {
