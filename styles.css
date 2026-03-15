@@ -32,7 +32,7 @@ body {
     radial-gradient(circle at top left, rgba(200, 146, 43, 0.12), transparent 26%),
     linear-gradient(180deg, #f7f1e7 0%, #f1ebe2 100%);
   color: var(--ink);
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Sora", sans-serif;
 }
 
 img {
@@ -182,7 +182,7 @@ a {
 .case-copy h2,
 .contact-card h2 {
   margin: 0;
-  font-family: "Instrument Serif", serif;
+  font-family: "Fraunces", serif;
   font-weight: 400;
   letter-spacing: -0.03em;
   line-height: 0.95;
