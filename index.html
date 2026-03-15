@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Branden Nevius | Software Engineer</title>
+    <meta
+      name="description"
+      content="Portfolio site for Branden Nevius featuring software architecture, AI product builds, and employer-facing case studies."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="ambient ambient-one"></div>
+      <div class="ambient ambient-two"></div>
+      <div class="ambient ambient-three"></div>
+
+      <header class="site-header">
+        <a class="brand" href="#top">
+          <span class="brand-mark">BN</span>
+          <span class="brand-text">
+            <strong>Branden Nevius</strong>
+            <small>Software Engineer</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <a href="#projects">Projects</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <a class="button button-small" href="assets/BrandenNeviusResume2026.pdf" download>
+          Resume
+        </a>
+      </header>
+
+      <main id="top">
+        <section class="hero section">
+          <div class="hero-copy">
+            <p class="eyebrow">Architecture, automation, and product-minded engineering</p>
+            <h1>
+              I build practical software for teams that need
+              <span>clarity, speed, and better systems.</span>
+            </h1>
+            <p class="hero-text">
+              I am a Systems Engineer at Eversource with an MCS from the University of Illinois
+              Urbana-Champaign. My recent work spans AI-assisted finance products, multi-tenant
+              SaaS, workflow automation, and operational software that turns fragmented processes
+              into clean user experiences.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button" href="assets/BrandenNeviusResume2026.pdf" download>Download resume</a>
+              <a class="button button-secondary" href="mailto:brandennevius@gmail.com">Email me</a>
+              <a class="button button-ghost" href="https://github.com/brandennevius" target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+            </div>
+
+            <ul class="hero-pills">
+              <li>Systems Engineer at Eversource</li>
+              <li>MCS, UIUC</li>
+              <li>Mansfield, Massachusetts</li>
+              <li>Open to employer conversations</li>
+            </ul>
+          </div>
+
+          <aside class="hero-panel">
+            <div class="panel-card panel-primary">
+              <p class="panel-label">Employer Snapshot</p>
+              <div class="snapshot-grid">
+                <article>
+                  <strong>Enterprise + product</strong>
+                  <span>Comfortable in structured delivery and greenfield builds.</span>
+                </article>
+                <article>
+                  <strong>Architecture depth</strong>
+                  <span>Designing integrations, workflows, and systems that scale across teams.</span>
+                </article>
+                <article>
+                  <strong>Full-stack execution</strong>
+                  <span>Shipping across frontend, backend, data, and external APIs.</span>
+                </article>
+                <article>
+                  <strong>Business context</strong>
+                  <span>Strong interest in finance, coaching, and workflow-heavy products.</span>
+                </article>
+              </div>
+            </div>
+
+            <div class="panel-card panel-accent">
+              <p class="panel-label">Core Strengths</p>
+              <div class="strength-list">
+                <span>System Architecture</span>
+                <span>Automation</span>
+                <span>API Integrations</span>
+                <span>Agile Delivery</span>
+                <span>AI Product Thinking</span>
+                <span>Technical Planning</span>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="section" id="projects">
+          <div class="section-heading">
+            <p class="eyebrow">Selected work</p>
+            <h2>Projects I would want an employer to open first</h2>
+            <p>
+              Each project is written as a short case study: what problem I was solving, how I
+              approached it, and what the build demonstrates.
+            </p>
+          </div>
+
+          <div class="project-grid">
+            <article class="project-card">
+              <div class="project-meta">
+                <span class="status status-private">Private codebase</span>
+                <span class="tag">SaaS</span>
+              </div>
+              <h3>PowerStrongAI</h3>
+              <p>
+                Multi-tenant coaching platform that brings CRM, messaging, billing, automations,
+                scheduling, and program delivery into one workspace.
+              </p>
+              <ul>
+                <li>Next.js, NestJS, Prisma, PostgreSQL, BullMQ, Stripe, Twilio</li>
+                <li>Subdomain-based tenant architecture and unified inbox workflows</li>
+                <li>Built for operators who usually juggle multiple disconnected tools</li>
+              </ul>
+              <a href="#powerstrongai">Read case study</a>
+            </article>
+
+            <article class="project-card">
+              <div class="project-meta">
+                <span class="status status-live">Live demo</span>
+                <span class="tag">Fintech</span>
+              </div>
+              <h3>LEDGR</h3>
+              <p>
+                Financial coaching product focused on turning transaction data into goals,
+                behavior signals, and AI-assisted insights.
+              </p>
+              <ul>
+                <li>Next.js, Prisma, Supabase, Plaid, OpenAI</li>
+                <li>Goal planning, transaction sync, categorization, and coach-style insight flows</li>
+                <li>Shows careful thinking around sensitive data and guided decision support</li>
+              </ul>
+              <a href="#ledgr">Read case study</a>
+            </article>
+
+            <article class="project-card">
+              <div class="project-meta">
+                <span class="status status-wip">In progress</span>
+                <span class="tag">Trading</span>
+              </div>
+              <h3>Trading Goal Dashboard</h3>
+              <p>
+                Planned portfolio and risk dashboard for traders who want a clearer read on
+                performance, discipline, and progress toward defined goals.
+              </p>
+              <ul>
+                <li>Structured outline ready for the next repo push</li>
+                <li>Focus on journaling, performance review, and risk guardrails</li>
+                <li>Extends my long-running interest in finance and trading tools</li>
+              </ul>
+              <a href="#trading-dashboard">Read outline</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="case-study section" id="powerstrongai">
+          <div class="case-copy">
+            <p class="eyebrow">Case study 01</p>
+            <h2>PowerStrongAI</h2>
+            <p class="case-summary">
+              A coaching business should not need one tool for CRM, another for messaging, another
+              for billing, and another for program delivery. PowerStrongAI is my attempt to unify
+              that operational stack into one tenant-aware product.
+            </p>
+
+            <div class="story-block">
+              <h3>Problem</h3>
+              <p>
+                Fitness and coaching businesses often run sales, communication, payments, and
+                client delivery through disconnected platforms. That makes follow-up inconsistent,
+                reporting fragmented, and the client experience harder to manage.
+              </p>
+            </div>
+
+            <div class="story-block">
+              <h3>Approach</h3>
+              <p>
+                I built a multi-tenant platform with subdomain-based routing, strict tenant
+                scoping, branded dashboards, CRM pipelines, messaging across multiple channels,
+                Stripe-powered payments, scheduling, workflow automation, and program delivery.
+                The stack combines Next.js on the frontend with a NestJS and Prisma backend,
+                PostgreSQL, Redis, and BullMQ for queued workflow execution.
+              </p>
+            </div>
+
+            <div class="story-block">
+              <h3>Impact</h3>
+              <p>
+                The result is a strong proof point for my ability to design systems that map to
+                real business operations, not just isolated app screens. It demonstrates product
+                thinking across architecture, integrations, workflow design, and user experience.
+              </p>
+            </div>
+
+            <div class="case-notes">
+              <span>Private repository</span>
+              <span>Employer walkthrough available on request</span>
+              <span>Frontend, backend, and integration work</span>
+            </div>
+          </div>
+
+          <div class="case-visual case-visual-wide">
+            <img src="assets/powerstrong-dashboard.png" alt="PowerStrongAI dashboard" loading="lazy" />
+            <img src="assets/powerstrong-messages.png" alt="PowerStrongAI messaging hub" loading="lazy" />
+          </div>
+        </section>
+
+        <section class="case-study section case-study-alt" id="ledgr">
+          <div class="case-visual case-visual-mobile">
+            <img src="assets/ledgr-product.png" alt="LEDGR product screenshot" loading="lazy" />
+            <img src="assets/ledgr-insights.png" alt="LEDGR insights screenshot" loading="lazy" />
+          </div>
+
+          <div class="case-copy">
+            <p class="eyebrow">Case study 02</p>
+            <h2>LEDGR</h2>
+            <p class="case-summary">
+              LEDGR is a financial coaching product focused on behavior change, not just reporting.
+              The idea is to pair connected financial data with clearer goals and AI-assisted
+              guidance.
+            </p>
+
+            <div class="story-block">
+              <h3>Problem</h3>
+              <p>
+                Personal finance apps often show balances and charts, but they do less to help a
+                user understand behavior, plan around goals, or turn noisy transaction data into
+                a useful coaching conversation.
+              </p>
+            </div>
+
+            <div class="story-block">
+              <h3>Approach</h3>
+              <p>
+                I built LEDGR with Supabase authentication, Plaid account linking, transaction
+                sync, goal planning, category management, AI chat, and goal payoff insights.
+                The product uses Next.js App Router, Prisma, PostgreSQL on Supabase, and OpenAI,
+                with specific attention to handling sensitive financial flows cleanly.
+              </p>
+            </div>
+
+            <div class="story-block">
+              <h3>Impact</h3>
+              <p>
+                LEDGR shows how I think about product design when data quality, security, and user
+                trust matter. It turns raw transaction streams into something closer to a guided
+                decision-support experience for users or coaches.
+              </p>
+            </div>
+
+            <div class="case-notes">
+              <a href="https://github.com/brandennevius/LEDGR" target="_blank" rel="noreferrer">Public repo</a>
+              <a href="https://ledgr-branden-nevius-projects-666c9e97.vercel.app" target="_blank" rel="noreferrer">
+                Live demo
+              </a>
+              <span>Web app plus mobile companion work</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="case-study section" id="trading-dashboard">
+          <div class="case-copy">
+            <p class="eyebrow">Case study 03</p>
+            <h2>Trading Goal Dashboard</h2>
+            <p class="case-summary">
+              This project is not pushed yet, but the product direction is defined. The goal is to
+              build a cleaner feedback loop for trading performance, discipline, and risk.
+            </p>
+
+            <div class="story-block">
+              <h3>Problem</h3>
+              <p>
+                Traders often track goals, risk limits, notes, and trade reviews across scattered
+                spreadsheets or broker dashboards. That makes it harder to see whether the process
+                is improving or whether rules are actually being followed.
+              </p>
+            </div>
+
+            <div class="story-block">
+              <h3>Approach</h3>
+              <p>
+                The planned dashboard centers on goal tracking, drawdown and position-size guardrails,
+                trade journaling, weekly reviews, and progress scorecards. The design will favor
+                accountability and pattern recognition over flashy charts alone.
+              </p>
+            </div>
+
+            <div class="story-block">
+              <h3>Impact</h3>
+              <p>
+                Once shipped, this project will round out the portfolio with another product at the
+                intersection of finance, automation, and decision support. It also connects back to
+                earlier trading tools I built, including an options profit calculator.
+              </p>
+            </div>
+
+            <div class="case-notes">
+              <span>Repository link coming soon</span>
+              <span>Outline included now for portfolio continuity</span>
+              <span>Built to expand as the repo lands</span>
+            </div>
+          </div>
+
+          <div class="blueprint-card" aria-label="Trading dashboard concept">
+            <div class="blueprint-top">
+              <span>Goal scorecard</span>
+              <span>Week 11</span>
+            </div>
+            <div class="blueprint-chart">
+              <span style="height: 42%"></span>
+              <span style="height: 65%"></span>
+              <span style="height: 51%"></span>
+              <span style="height: 80%"></span>
+              <span style="height: 58%"></span>
+              <span style="height: 88%"></span>
+            </div>
+            <div class="blueprint-metrics">
+              <article>
+                <strong>Risk discipline</strong>
+                <small>2 days inside guardrails</small>
+              </article>
+              <article>
+                <strong>Goal progress</strong>
+                <small>+6.4% vs monthly target</small>
+              </article>
+              <article>
+                <strong>Review cadence</strong>
+                <small>Journal updated 5 of 5 sessions</small>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="about">
+          <div class="section-heading">
+            <p class="eyebrow">How I work</p>
+            <h2>What I bring beyond code</h2>
+            <p>
+              My background blends enterprise engineering discipline with a strong bias toward
+              building useful products. I like the messy middle where requirements, operations,
+              systems, and user experience all have to line up.
+            </p>
+          </div>
+
+          <div class="value-grid">
+            <article>
+              <h3>Architecture that matches reality</h3>
+              <p>
+                I am comfortable working from business requirements and integration constraints
+                back to the system design that supports them.
+              </p>
+            </article>
+            <article>
+              <h3>Automation mindset</h3>
+              <p>
+                I look for ways to reduce repetitive operational work and make workflows more
+                reliable through better tooling and cleaner process design.
+              </p>
+            </article>
+            <article>
+              <h3>Cross-functional communication</h3>
+              <p>
+                My current and past roles required coordination with system engineers, QA, support,
+                and stakeholders with different priorities and technical depth.
+              </p>
+            </article>
+            <article>
+              <h3>Personal interest areas</h3>
+              <p>
+                A lot of my side projects gravitate toward finance, coaching, analytics, and tools
+                that help people make better decisions with real data.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="contact section" id="contact">
+          <div class="contact-card">
+            <p class="eyebrow">Contact</p>
+            <h2>Interested in product, platform, or systems work?</h2>
+            <p>
+              I am open to conversations with employers who need someone comfortable with both
+              architecture and execution. The fastest way to reach me is by email.
+            </p>
+
+            <div class="contact-actions">
+              <a class="button" href="mailto:brandennevius@gmail.com">Email Branden</a>
+              <a class="button button-secondary" href="assets/BrandenNeviusResume2026.pdf" download>
+                Download resume
+              </a>
+              <a
+                class="button button-ghost"
+                href="https://www.linkedin.com/in/brandennevius/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </a>
+            </div>
+
+            <div class="contact-details">
+              <span>brandennevius@gmail.com</span>
+              <span>508.838.6927</span>
+              <span>Mansfield, MA</span>
+              <span>GitHub: @brandennevius</span>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <span>© <span id="year"></span> Branden Nevius</span>
+        <span>Built as a static site for GitHub Pages</span>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
