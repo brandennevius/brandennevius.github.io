@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>PowerStrongAI — Branden Nevius</title>
+    <meta
+      name="description"
+      content="Inside PowerStrongAI: a multi-tenant coaching platform built by Branden Nevius. Explore the dashboards, guided AI, unified inbox, and system architecture."
+    />
+    <meta
+      property="og:title"
+      content="PowerStrongAI · A product, built end to end"
+    />
+    <meta
+      property="og:description"
+      content="From fragmented operations to one intelligent workspace. An independent software project by Branden Nevius."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="powerstrong.css" />
+    <script src="powerstrong.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="nav wrap">
+      <a class="identity" href="index.html"
+        ><span class="monogram"
+          >BN<span
+            ><svg
+              class="inline-icon"
+              viewBox="0 0 20 20"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.4"
+            >
+              <path d="M4 16 16 4M4 4h12v12" /></svg></span></span
+        ><span
+          >Branden Nevius<small>ENGINEERING / SELECTED WORK</small></span
+        ></a
+      >
+      <nav aria-label="Project navigation">
+        <a href="#tour">Product tour</a><a href="#engineering">Under the hood</a
+        ><a class="nav-contact" href="mailto:brandennevius@gmail.com"
+          >Let’s talk
+          <span
+            ><svg
+              class="inline-icon"
+              viewBox="0 0 20 20"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.4"
+            >
+              <path d="M4 16 16 4M4 4h12v12" /></svg></span
+        ></a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero wrap">
+        <div class="eyebrow">
+          <span class="dot"></span> INDEPENDENT BUILD
+          <span class="divider">/</span> SAAS PLATFORM
+          <span class="beta">BETA</span>
+        </div>
+        <h1>Many moving parts.<br /><em>One powerful workspace.</em></h1>
+        <div class="hero-bottom">
+          <p>
+            I built <strong>PowerStrongAI</strong> to connect the entire
+            coaching business: relationships, conversations, payments, and
+            delivery. An end-to-end product with intelligence built into the
+            workflow.
+          </p>
+          <a class="button" href="#tour">Explore the product <span>↓</span></a>
+        </div>
+        <div
+          class="hero-stage"
+          aria-label="Illustrated product overview using sample data"
+        >
+          <div class="stage-grid"></div>
+          <div class="orbit-label">THE COACHING OPERATING SYSTEM</div>
+          <div class="product-window">
+            <div class="window-bar">
+              <span class="window-dots">● ● ●</span
+              ><span>POWERSTRONGAI / WORKSPACE OVERVIEW</span
+              ><span class="secure">◈ Tenant-scoped</span>
+            </div>
+            <div class="workspace">
+              <aside class="app-sidebar">
+                <div class="app-brand">
+                  <b
+                    >p<span
+                      ><svg
+                        class="inline-icon"
+                        viewBox="0 0 20 20"
+                        aria-hidden="true"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.4"
+                      >
+                        <path d="M4 16 16 4M4 4h12v12" /></svg></span
+                  ></b>
+                  PowerStrong<span>AI</span>
+                </div>
+                <div class="workspace-name">
+                  N <span>Northstar Coaching<small>Team workspace</small></span
+                  ><span>⌄</span>
+                </div>
+                <div class="nav-label">WORKSPACE</div>
+                <div class="app-nav">
+                  <span class="selected">▦ <i>Overview</i></span
+                  ><span>✧ <i>Intelligence</i><b>4</b></span
+                  ><span>◎ <i>Contacts</i></span
+                  ><span>▤ <i>Unified inbox</i><b>3</b></span
+                  ><span>▥ <i>Pipeline</i></span
+                  ><span
+                    ><svg
+                      class="inline-icon"
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                    >
+                      <path d="M4 5h12v12H4zM4 9h12M7 3v4M13 3v4" />
+                    </svg>
+                    <i>Calendar</i></span
+                  ><span
+                    ><svg
+                      class="inline-icon"
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                    >
+                      <path d="M4 16 16 4M4 4h12v12" />
+                    </svg>
+                    <i>Billing</i></span
+                  ><span>⌘ <i>Workflows</i></span>
+                </div>
+                <div class="sidebar-bottom">
+                  <span class="avatar">JD</span
+                  ><span>Jordan Davis<small>Workspace owner</small></span
+                  ><span>⚙</span>
+                </div>
+              </aside>
+              <div class="app-main">
+                <div class="app-top">
+                  <span>Workspace / <b>Overview</b></span
+                  ><span
+                    >⌕ <span class="key">⌘ K</span>
+                    <span class="avatar tiny">JD</span></span
+                  >
+                </div>
+                <div class="app-content">
+                  <div class="greeting">
+                    <div>
+                      <span class="mini-label">YOUR BUSINESS, AT A GLANCE</span>
+                      <h2>Good morning, Jordan <span>✳</span></h2>
+                      <p>Less admin. More time for the people you coach.</p>
+                    </div>
+                    <span class="date-chip"
+                      >Workspace overview
+                      <svg
+                        class="inline-icon"
+                        viewBox="0 0 20 20"
+                        aria-hidden="true"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.4"
+                      >
+                        <path d="M4 16 16 4M4 4h12v12" /></svg
+                    ></span>
+                  </div>
+                  <div class="metrics">
+                    <div>
+                      <span>Active clients <i>◎</i></span
+                      ><strong>48<small>clients</small></strong>
+                      <div class="spark mint">
+                        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
+                        ><i></i><i></i><i></i><i></i>
+                      </div>
+                    </div>
+                    <div>
+                      <span
+                        >Pipeline value
+                        <i
+                          ><svg
+                            class="inline-icon"
+                            viewBox="0 0 20 20"
+                            aria-hidden="true"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.4"
+                          >
+                            <path d="M4 16 16 4M4 4h12v12" /></svg></i></span
+                      ><strong>$12,400</strong
+                      ><small class="metric-note">Across 8 opportunities</small>
+                    </div>
+                    <div>
+                      <span>Unread messages <i>▤</i></span
+                      ><strong>3<small>to review</small></strong
+                      ><small class="metric-note"
+                        >Email · SMS · Instagram</small
+                      >
+                    </div>
+                  </div>
+                  <div class="app-grid">
+                    <div class="queue">
+                      <div class="card-title">
+                        <h3><span>✧</span> Intelligence queue</h3>
+                        <span class="guided">Guided mode</span>
+                      </div>
+                      <p class="card-sub">
+                        The next best action, with context.
+                      </p>
+                      <div class="queue-row">
+                        <span class="queue-icon lavender"
+                          ><svg
+                            class="inline-icon"
+                            viewBox="0 0 20 20"
+                            aria-hidden="true"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.4"
+                          >
+                            <path d="M4 16 16 4M4 4h12v12" /></svg
+                        ></span>
+                        <div>
+                          <b>Follow up with a warm lead</b
+                          ><small>Alex Morgan · Consultation requested</small>
+                        </div>
+                        <span class="queue-tag">Review →</span>
+                      </div>
+                      <div class="queue-row">
+                        <span class="queue-icon peach"
+                          ><svg
+                            class="inline-icon"
+                            viewBox="0 0 20 20"
+                            aria-hidden="true"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.4"
+                          >
+                            <path
+                              d="M10 17 3.5 10.5C-1 5.5 6 0 10 6c4-6 11-.5 6.5 4.5Z"
+                            /></svg
+                        ></span>
+                        <div>
+                          <b>Check in with an at-risk client</b
+                          ><small>Sam Taylor · Engagement signal</small>
+                        </div>
+                        <span class="queue-tag">Review →</span>
+                      </div>
+                      <div class="queue-row">
+                        <span class="queue-icon green">✓</span>
+                        <div>
+                          <b>Keep onboarding moving</b
+                          ><small>Casey Lee · Intake form pending</small>
+                        </div>
+                        <span class="queue-tag">Review →</span>
+                      </div>
+                      <div class="queue-footer">
+                        <span class="dot"></span> Recommendations stay connected
+                        to the contact.
+                      </div>
+                    </div>
+                    <div class="agenda">
+                      <div class="card-title">
+                        <h3>Today’s agenda</h3>
+                        <span
+                          ><svg
+                            class="inline-icon"
+                            viewBox="0 0 20 20"
+                            aria-hidden="true"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.4"
+                          >
+                            <path d="M4 16 16 4M4 4h12v12" /></svg
+                        ></span>
+                      </div>
+                      <div class="agenda-row">
+                        <time>09:00</time>
+                        <div>
+                          <b>Client check-in</b
+                          ><small>Alex Morgan · 30 min</small>
+                        </div>
+                      </div>
+                      <div class="agenda-row">
+                        <time>11:30</time>
+                        <div>
+                          <b>Discovery call</b
+                          ><small>Sam Taylor · 45 min</small>
+                        </div>
+                      </div>
+                      <div class="agenda-note">
+                        One place for the next conversation.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="float-card">
+            <span class="float-icon">✧</span>
+            <div>
+              <b>Context → insight → action</b
+              ><small>AI that works where the work happens.</small>
+            </div>
+          </div>
+        </div>
+        <p class="visual-caption">
+          <span>01 / PRODUCT OVERVIEW</span> Editorial product illustration ·
+          fictional sample data · reflects implemented capabilities, not a live
+          session.
+        </p>
+      </section>
+      <section class="facts wrap" aria-label="Project details">
+        <div>
+          <span>MY ROLE</span><strong>Full-stack product builder</strong>
+        </div>
+        <div><span>THE BUILD</span><strong>Multi-tenant SaaS</strong></div>
+        <div>
+          <span>THE FOCUS</span
+          ><strong>Operations + guided intelligence</strong>
+        </div>
+        <div>
+          <span>STATUS</span
+          ><strong><span class="dot"></span> Active beta development</strong>
+        </div>
+      </section>
+      <section class="intro wrap section">
+        <div>
+          <p class="eyebrow">THE PRODUCT IDEA</p>
+          <h2>Connect the work.<br /><em>Surface what matters.</em></h2>
+        </div>
+        <div>
+          <p class="large-copy">
+            A coaching business is a surprisingly complex system. Leads become
+            clients. Conversations trigger follow-ups. Payments unlock programs.
+          </p>
+          <p>
+            PowerStrongAI brings those handoffs into one tenant-aware workspace,
+            with shared contact context and AI-assisted next steps. I built
+            across the frontend, backend, data model, and integrations to make
+            the whole loop work together.
+          </p>
+        </div>
+      </section>
+      <section class="tour-section" id="tour">
+        <div class="wrap section">
+          <div class="section-top">
+            <div>
+              <p class="eyebrow">THE PRODUCT, UP CLOSE</p>
+              <h2>Depth beyond<br /><em>the dashboard.</em></h2>
+            </div>
+            <p>
+              Four connected surfaces.<br />One consistent operating picture.
+            </p>
+          </div>
+          <div
+            class="tour-tabs"
+            role="tablist"
+            aria-label="Product capabilities"
+          >
+            <button
+              role="tab"
+              aria-selected="true"
+              aria-controls="feature-panel"
+              id="tab-intelligence"
+              data-feature="intelligence"
+            >
+              01 <span>Guided intelligence</span></button
+            ><button
+              role="tab"
+              aria-selected="false"
+              tabindex="-1"
+              aria-controls="feature-panel"
+              id="tab-inbox"
+              data-feature="inbox"
+            >
+              02 <span>Unified inbox</span></button
+            ><button
+              role="tab"
+              aria-selected="false"
+              tabindex="-1"
+              aria-controls="feature-panel"
+              id="tab-lifecycle"
+              data-feature="lifecycle"
+            >
+              03 <span>Client lifecycle</span></button
+            ><button
+              role="tab"
+              aria-selected="false"
+              tabindex="-1"
+              aria-controls="feature-panel"
+              id="tab-workflows"
+              data-feature="workflows"
+            >
+              04 <span>Workflow automation</span>
+            </button>
+          </div>
+          <div
+            class="feature-panel"
+            id="feature-panel"
+            role="tabpanel"
+            aria-labelledby="tab-intelligence"
+            tabindex="0"
+          >
+            <div class="feature-copy">
+              <span id="feature-kicker" class="mini-label"
+                >INTELLIGENCE, WITH CONTEXT</span
+              >
+              <h3 id="feature-title">
+                From a signal<br />to a useful next step.
+              </h3>
+              <p id="feature-description">
+                Lead scoring, client health signals, and a scoped copilot help a
+                coach decide where to focus. Recommendations connect to contact
+                context instead of living in a separate chat window.
+              </p>
+              <ul id="feature-points">
+                <li>Contact-scoped copilot and workspace assistant</li>
+                <li>Lead and engagement signals in an action queue</li>
+                <li>Suggest-only, guided, and policy-based modes</li>
+              </ul>
+              <p class="feature-footnote">
+                Illustrated workflow · fictional sample data
+              </p>
+            </div>
+            <div class="feature-art" id="feature-art"></div>
+          </div>
+        </div>
+      </section>
+      <section class="section wrap" id="engineering">
+        <div class="section-top">
+          <div>
+            <p class="eyebrow">UNDER THE HOOD</p>
+            <h2>A polished interface.<br /><em>A connected system.</em></h2>
+          </div>
+          <p>
+            The interesting work is in the boundaries:<br />tenants, services,
+            events, and external systems.
+          </p>
+        </div>
+        <div class="architecture">
+          <div class="arch-row">
+            <span class="arch-label">EXPERIENCE</span>
+            <div class="arch-node">
+              <b>Next.js + React</b
+              ><span>Workspace · CRM · inbox · copilot</span>
+            </div>
+            <span class="arch-connector">↔</span>
+            <div class="arch-node">
+              <b>NestJS API</b
+              ><span>Authentication · roles · tenant-scoped services</span>
+            </div>
+          </div>
+          <div class="arch-path">
+            ↓ <span>Shared domain model / asynchronous work</span> ↓
+          </div>
+          <div class="arch-row">
+            <span class="arch-label">FOUNDATION</span>
+            <div class="arch-node">
+              <b>PostgreSQL + Prisma</b
+              ><span>Contacts · activity · payments · programs</span>
+            </div>
+            <span class="arch-connector">↔</span>
+            <div class="arch-node">
+              <b>Redis + BullMQ</b
+              ><span>Queued execution · scheduled workflow steps</span>
+            </div>
+          </div>
+          <div class="arch-path">↓ <span>Provider integrations</span> ↓</div>
+          <div class="provider-row">
+            <span>Stripe</span><span>Twilio</span><span>Google</span
+            ><span>Meta / Instagram</span><span>AI services</span>
+          </div>
+        </div>
+        <div class="engineering-grid">
+          <article>
+            <span class="card-number">01 / TENANCY</span>
+            <h3>One platform. <br />Distinct workspaces.</h3>
+            <p>
+              Subdomain routing, workspace branding, roles, and tenant-scoped
+              service queries organize the product around the business using it.
+            </p>
+            <code>tenant context → service → data</code>
+          </article>
+          <article>
+            <span class="card-number">02 / INTEGRATIONS</span>
+            <h3>External events. <br />Connected context.</h3>
+            <p>
+              Messaging providers, payments, and calendar integrations connect
+              external activity to contacts and operational workflows.
+            </p>
+            <code>provider → contact → timeline</code>
+          </article>
+          <article>
+            <span class="card-number">03 / AI EXPERIENCE</span>
+            <h3>Useful assistance. <br />Visible control.</h3>
+            <p>
+              The assistant has scoped context, configurable modes, and action
+              metadata, with source, fallback, and tool execution information in
+              its response model.
+            </p>
+            <code>context → recommendation → action</code>
+          </article>
+        </div>
+      </section>
+      <section class="actual-section section wrap">
+        <div class="section-top">
+          <div>
+            <p class="eyebrow">FROM THE BUILD</p>
+            <h2>The actual workspace.</h2>
+          </div>
+          <p>
+            An earlier development capture.<br />The illustrations above explain
+            the broader product.
+          </p>
+        </div>
+        <figure class="actual-frame">
+          <div class="actual-crop">
+            <img
+              src="assets/powerstrong-dashboard.png"
+              alt="Earlier PowerStrongAI development capture showing workspace navigation, onboarding setup, agenda, and inbox counts"
+              loading="eager"
+            />
+          </div>
+          <figcaption>
+            Actual development screenshot · workspace overview, setup checklist,
+            agenda, and channel counts. Cropped in this view.
+          </figcaption>
+        </figure>
+      </section>
+      <section class="section wrap takeaway">
+        <p class="eyebrow">WHY THIS BUILD MATTERS</p>
+        <h2>Different domain.<br /><em>The same engineering instincts.</em></h2>
+        <p>
+          Information-dense interfaces. Connected data. Clear priorities.
+          Deliberate actions. These are the problems I enjoy solving—whether the
+          workspace is for a coach, a financial workflow, or a trader.
+        </p>
+        <div class="takeaway-tags">
+          <span>Dashboard UX</span><span>API integrations</span
+          ><span>Asynchronous workflows</span><span>Data modeling</span
+          ><span>AI product design</span>
+        </div>
+        <p class="honest-note">
+          PowerStrongAI is an independent beta project. This case study
+          demonstrates implementation scope and engineering decisions; it does
+          not claim production scale or measured business outcomes.
+        </p>
+      </section>
+      <footer class="wrap footer">
+        <div>
+          <p class="eyebrow">LET’S BUILD SOMETHING USEFUL</p>
+          <h2>See the work.<br />Talk through the decisions.</h2>
+          <a
+            class="button"
+            href="mailto:brandennevius@gmail.com?subject=PowerStrongAI%20project%20walkthrough"
+            >Request a walkthrough
+            <span
+              ><svg
+                class="inline-icon"
+                viewBox="0 0 20 20"
+                aria-hidden="true"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.4"
+              >
+                <path d="M4 16 16 4M4 4h12v12" /></svg></span
+          ></a>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">← Back to portfolio</a
+          ><a href="assets/BrandenNeviusResume2026.pdf"
+            >View resume
+            <svg
+              class="inline-icon"
+              viewBox="0 0 20 20"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.4"
+            >
+              <path d="M4 16 16 4M4 4h12v12" /></svg></a
+          ><a
+            href="https://github.com/brandennevius"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub
+            <svg
+              class="inline-icon"
+              viewBox="0 0 20 20"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.4"
+            >
+              <path d="M4 16 16 4M4 4h12v12" /></svg></a
+          ><small>Designed &amp; built by Branden Nevius</small>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>

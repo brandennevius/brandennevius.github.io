@@ -31,3 +31,11 @@ Static portfolio site built for GitHub Pages.
 ## GitHub Pages
 
 If this repository is named `brandennevius.github.io`, pushing `main` will publish it as the user site.
+
+## PowerStrongAI visual case study
+
+`powerstrong.html` is the standalone product and engineering case study, linked from the homepage featured build, navigation, and project card. `powerstrong.css` and `powerstrong.js` are self-contained; no build or package installation is required.
+
+Run locally with `python -m http.server 4173` from this directory. The feature tour supports mouse, Left/Right arrows, Home, and End. Product illustrations use explicitly fictional sample data; the development screenshot is separately labeled. Keep those distinctions when refreshing visuals.
+
+Before publishing, check desktop and mobile layouts, all four tour tabs, local links and assets, and browser errors. Deployment follows the existing GitHub Pages workflow on main.
