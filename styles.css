@@ -1069,3 +1069,9 @@ a {
   vertical-align: -0.12em;
   flex-shrink: 0;
 }
+
+.featured-build-visual > img {
+  width: 100%;
+  height: auto;
+  border-radius: 7px;
+}
