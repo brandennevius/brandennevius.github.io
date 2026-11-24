@@ -50,3 +50,5 @@
     padding: 11px 12px;
   }
 }
+
+.connection { padding-top: clamp(105px, 11vw, 156px); }
