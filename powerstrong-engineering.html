@@ -40,14 +40,14 @@
     <p><a href="#release">Release follows verification →</a></p>
   </figure>
   <ol class="process-stages">
-    <li><h3>Requirements</h3><p>I met with my cofounder to understand his coaching business. We identified what to preserve and what the software needed to improve.</p></li>
-    <li><h3>ConOps/User Workflows</h3><p>I mapped how leads come in, who takes the next step, and how the coach tracks the handoff.</p></li>
-    <li><h3>Design / Specification</h3><p>I defined what starts a workflow, how actions run, and what the coach sees when a step succeeds or fails.</p></li>
-    <li><h3>Implementation</h3><p>I built the workflow editor, event-based enrollment, and execution history across the app and API.</p></li>
-    <li><h3>Unit &amp; integration tests</h3><p>Unit tests check individual action rules. API checks verify that a submission creates the expected enrollment, task, and CRM updates.</p></li>
-    <li><h3>End-to-end tests</h3><p>I used Playwright to submit the intake in the browser and verify that the coach could see the completed workflow and assigned follow-up.</p></li>
-    <li><h3>User verification</h3><p>Walk through the handoff with my cofounder to confirm it fits his coaching process.</p></li>
-    <li><h3>Release</h3><p>Publish the reviewed change and verify it in the live environment.</p></li>
+    <li><h3>Requirements</h3><p>Work with my cofounder to understand how the business operates, agree on what to preserve, and define what needs to improve.</p></li>
+    <li><h3>ConOps/User Workflows</h3><p>Map how people will use the product, including who does what, where handoffs happen, and how users handle exceptions.</p></li>
+    <li><h3>Design / Specification</h3><p>Translate those workflows into system behavior and acceptance criteria for expected outcomes and failure paths.</p></li>
+    <li><h3>Implementation</h3><p>Build the specified behavior across the interface and backend. Review the change against the acceptance criteria.</p></li>
+    <li><h3>Unit &amp; integration tests</h3><p>Check individual rules in isolation and verify that components work together across service and data boundaries.</p></li>
+    <li><h3>End-to-end tests</h3><p>Use Playwright to exercise complete user journeys in the browser and verify the outcomes users should see.</p></li>
+    <li><h3>User verification</h3><p>Walk through realistic scenarios with my cofounder in staging. Confirm the result fits how the team works and address feedback before release.</p></li>
+    <li><h3>Release</h3><p>Deploy the reviewed change and run a smoke check in the live environment.</p></li>
   </ol>
   <a class="quiet-link" href="#verification">See the worked example ↓</a>
 </section>
