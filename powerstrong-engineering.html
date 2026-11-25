@@ -55,17 +55,26 @@ CHANGE_STAGE  COMPLETED</code></pre>
     </li>
     <li id="playwright">
       <h3>Playwright automation</h3>
-      <p>Checked-in smoke coverage for the signed-in assistant screens. This test checks the dashboard queue and guided mode after login.</p>
-      <p><code>tests/e2e/assistant-guided.spec.ts</code></p>
-      <pre tabindex="0"><code>test(&#x27;dashboard surfaces assistant mode and intelligence summary&#x27;, async ({ page }) =&gt; {
-  await login(page);
-  await page.goto(`${baseUrl}/dashboard`);
+      <p>This browser check opens Sam Taylor’s execution timeline and verifies the two completed steps from the run above.</p>
+      <pre tabindex="0"><code>await tab.goto(workflowUrl);
+await tab.playwright.getByRole(&#x27;button&#x27;, {
+  name: &#x27;Execution Timeline&#x27;, exact: true,
+}).click();
 
-  await expect(page.getByRole(&#x27;heading&#x27;, { name: /Intelligence Queue/i })).toBeVisible();
-  await expect(page.getByText(/Suggest only|Guided|Policy automation/i).first()).toBeVisible();
-  await expect(page.getByText(/Assistant tasks/i)).toBeVisible();
-});</code></pre>
-      <p>Playwright retains traces, screenshots, and video on failure. The enrollment and CRM checks for this run were verified separately in the browser and API.</p>
+const completed = tab.playwright.getByRole(&#x27;row&#x27;)
+  .filter({ hasText: &#x27;Sam Taylor&#x27; })
+  .filter({ hasText: &#x27;COMPLETED&#x27; });
+
+for (const step of [
+  &#x27;Create the consultation follow-up&#x27;,
+  &#x27;Move the contact to Consultation&#x27;,
+]) {
+  await completed.filter({ hasText: step }).waitFor({ state: &#x27;visible&#x27; });
+}
+if (await completed.count() !== 2) {
+  throw new Error(&#x27;Expected exactly two completed steps for Sam&#x27;);
+}</code></pre>
+      <p><strong>Result:</strong> two completed steps for Sam, one saved consultation task, and the Consultation stage after reload. The check reused the completed demo run. It did not enroll Sam again or run as a CI gate.</p>
     </li>
     <li id="user-verification">
       <h3>User verification</h3>
@@ -74,7 +83,7 @@ CHANGE_STAGE  COMPLETED</code></pre>
     </li>
     <li id="release">
       <h3>Release</h3>
-      <p>Published the verified workflow evidence to GitHub Pages. The release check compares the public page and its screenshot assets to the reviewed commit.</p>
+      <p>Published this case study to GitHub Pages. The release check verified that the public page and screenshots matched the reviewed commit. The workflow itself was exercised in the demo workspace.</p>
       <p><a class="quiet-link" href="https://github.com/brandennevius/brandennevius.github.io/commits/main/">Portfolio release history →</a></p>
     </li>
   </ol>
