@@ -36,17 +36,21 @@
   <ol class="delivery-steps">
     <li id="requirements">
       <h3>Requirements</h3>
-      <p>Give the coach an assigned follow-up after a lead inquiry and record what happened.</p>
+      <h4>Business goal</h4>
+      <p>Help a coach turn a new inquiry into an owned follow-up. The coach should be able to see who is responsible and what still needs attention on the lead’s record.</p>
+      <h4>How the goal became requirements</h4>
+      <p>Start with the coach’s current process. Identify the decision the coach keeps, the work the software can take over, and the result the coach needs to see. For inquiry follow-through, that gives us four requirements.</p>
       <ul>
-        <li><strong>Valid lead with email:</strong> Create one consultation task and move the contact to Consultation.</li>
-        <li><strong>Blank or placeholder email:</strong> Skip the task and record the skip. The separate stage-change step still runs.</li>
-        <li><strong>Retry with the same request key:</strong> Return the same enrollment without repeating either step.</li>
-        <li><strong>Unknown contact:</strong> Reject enrollment and record no workflow actions.</li>
+        <li><strong>Keep the coach in control:</strong> Let the coach choose which lead to enroll for consultation follow-up.</li>
+        <li><strong>Assign the next action:</strong> Create an owned consultation task on the right contact when an email is available.</li>
+        <li><strong>Show progress:</strong> Move the lead into the Consultation stage and show the result of each workflow step.</li>
+        <li><strong>Handle exceptions safely:</strong> Recognize missing contact information, reject unknown contacts, and prevent duplicate work when a request is retried.</li>
       </ul>
+      <p>These requirements drive the workflow design and the acceptance checks below.</p>
     </li>
     <li id="workflows">
       <h3>Workflows</h3>
-      <p>Configure the email condition and two immediate actions. Enroll a demo lead and inspect the execution history.</p>
+      <p>The coach starts the workflow by enrolling a lead. The first step checks for an email before creating the consultation task. The second step updates the CRM stage independently. The execution history records both outcomes.</p>
       <div class="delivery-gallery">
         <figure><a href="assets/powerstrong/workflow-structure.webp"><img src="assets/powerstrong/workflow-structure.webp" width="1280" height="720" alt="Workflow builder showing the email condition, consultation follow-up, and stage change" loading="lazy"></a><figcaption>Workflow builder</figcaption></figure>
         <figure><a href="assets/powerstrong/workflow-execution.webp"><img src="assets/powerstrong/workflow-execution.webp" width="1280" height="720" alt="Execution history showing both workflow steps completed" loading="lazy"></a><figcaption>Execution history</figcaption></figure>
