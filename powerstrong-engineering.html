@@ -6,7 +6,7 @@
   <title>PowerStrongAI Engineering | Branden Nevius</title>
   <meta name="description" content="Architecture and workflow verification for PowerStrongAI, an independent coaching platform by Branden Nevius.">
   <meta name="theme-color" content="#192e25">
-  <link rel="stylesheet" href="powerstrong.css?v=20261124-engineering-header">
+  <link rel="stylesheet" href="powerstrong.css?v=20261124-workflow-edges">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -38,9 +38,10 @@
       <h3>Requirements</h3>
       <p>Give the coach an assigned follow-up after a lead inquiry and record what happened.</p>
       <ul>
-        <li>Start the workflow through manual enrollment.</li>
-        <li>When the lead has an email, create one consultation task on the contact.</li>
-        <li>Move the lead to <strong>Consultation</strong> and show the result of each step.</li>
+        <li><strong>Valid lead with email:</strong> Create one consultation task and move the contact to Consultation.</li>
+        <li><strong>Blank or placeholder email:</strong> Skip the task and record the skip. The separate stage-change step still runs.</li>
+        <li><strong>Retry with the same request key:</strong> Return the same enrollment without repeating either step.</li>
+        <li><strong>Unknown contact:</strong> Reject enrollment and record no workflow actions.</li>
       </ul>
     </li>
     <li id="workflows">
@@ -52,6 +53,17 @@
       </div>
       <pre tabindex="0"><code>CREATE_TASK   COMPLETED
 CHANGE_STAGE  COMPLETED</code></pre>
+      <h4>Edge cases and unhappy path</h4>
+      <dl class="workflow-cases">
+        <div><dt>Blank email</dt><dd><strong>Pass.</strong> Task skipped, zero tasks created, and stage moved to Consultation.</dd></div>
+        <div><dt>Social lead with placeholder email</dt><dd><strong>Failed acceptance check.</strong> The presence check treated the placeholder as an email and created one task.</dd></div>
+        <div><dt>Retry with the same key</dt><dd><strong>Pass.</strong> The API returned the same enrollment ID. One enrollment and one task remained.</dd></div>
+        <div><dt>Unknown contact</dt><dd><strong>Pass.</strong> The API returned HTTP 404 and created no enrollment.</dd></div>
+      </dl>
+      <figure class="delivery-result">
+        <a href="assets/powerstrong/workflow-edge-timeline.webp"><img src="assets/powerstrong/workflow-edge-timeline.webp" width="1280" height="720" alt="Execution timeline showing a skipped task for Taylor and completed task steps for Rowan and Drew" loading="lazy"></a>
+        <figcaption>Execution timeline for the edge-case fixtures in the same workflow.</figcaption>
+      </figure>
     </li>
     <li id="playwright">
       <h3>Playwright automation</h3>
@@ -74,7 +86,25 @@ for (const step of [
 if (await completed.count() !== 2) {
   throw new Error(&#x27;Expected exactly two completed steps for Sam&#x27;);
 }</code></pre>
-      <p><strong>Result:</strong> two completed steps for Sam, one saved consultation task, and the Consultation stage after reload. The check reused the completed demo run. It did not enroll Sam again or run as a CI gate.</p>
+      <h4>Browser checks for the edge cases</h4>
+      <p>The timeline check records what each run actually did. Rowan’s completed task reproduces the placeholder-email failure.</p>
+      <pre tabindex="0"><code>for (const [lead, observedStatus] of [
+  [&#x27;Taylor&#x27;, &#x27;SKIPPED&#x27;],
+  [&#x27;Rowan&#x27;, &#x27;COMPLETED&#x27;],
+  [&#x27;Drew&#x27;, &#x27;COMPLETED&#x27;],
+]) {
+  const rows = tab.playwright.getByRole(&#x27;row&#x27;, {
+    name: new RegExp(&#x27;^&#x27; + lead + &#x27; &#x27;),
+  });
+  await rows.filter({ hasText: &#x27;Create the consultation follow-up&#x27; })
+    .getByRole(&#x27;cell&#x27;, { name: observedStatus, exact: true })
+    .waitFor({ state: &#x27;visible&#x27; });
+  await rows.filter({ hasText: &#x27;Move the contact to Consultation&#x27; })
+    .getByRole(&#x27;cell&#x27;, { name: &#x27;COMPLETED&#x27;, exact: true })
+    .waitFor({ state: &#x27;visible&#x27; });
+  if (await rows.count() !== 2) throw new Error(lead + &#x27; has unexpected execution count&#x27;);
+}</code></pre>
+      <p>I checked the same-key retry and the unknown-contact rejection through the API. The browser checks read completed demo runs.</p>
     </li>
     <li id="user-verification">
       <h3>User verification</h3>

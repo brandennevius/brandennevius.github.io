@@ -103,3 +103,9 @@
   .delivery-nav li + li::before { display: none; }
   .delivery-steps > li { padding-left: 6px; }
 }
+
+.workflow-cases { display: grid; gap: 0; margin: 16px 0 22px; }
+.workflow-cases > div { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(0, 3fr); gap: 14px; padding-block: 10px; border-top: 1px solid #cbd5c4; }
+.workflow-cases dt { font-weight: 650; }
+.workflow-cases dd { margin: 0; color: var(--muted); line-height: 1.6; }
+@media (max-width: 650px) { .workflow-cases > div { grid-template-columns: 1fr; gap: 4px; } }
