@@ -6,7 +6,7 @@
   <title>PowerStrongAI Engineering | Branden Nevius</title>
   <meta name="description" content="Architecture and workflow verification for PowerStrongAI, an independent coaching platform by Branden Nevius.">
   <meta name="theme-color" content="#192e25">
-  <link rel="stylesheet" href="powerstrong.css?v=20261124-sticky-nav">
+  <link rel="stylesheet" href="powerstrong.css?v=20261124-engineering-v">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -27,12 +27,23 @@
 
 <section class="delivery-overview" aria-labelledby="process-title">
   <h2 id="process-title">From requirements to release</h2>
+  <figure class="engineering-v" aria-labelledby="v-title">
+    <figcaption id="v-title">Systems engineering V</figcaption>
+    <ol class="v-stages">
+      <li class="v-requirements"><a href="#requirements">Requirements</a></li>
+      <li class="v-design"><a href="#workflows">Workflow design</a></li>
+      <li class="v-build"><span>Implementation</span></li>
+      <li class="v-test"><a href="#playwright">Browser checks</a></li>
+      <li class="v-verify"><a href="#user-verification">User verification</a></li>
+    </ol>
+    <p>Requirements guide user verification. Workflow design guides browser checks. <a href="#release">Release follows verification →</a></p>
+  </figure>
   <ol class="process-stages">
     <li><h3>Requirements</h3><p>I met with my cofounder to understand his coaching business. We identified what to preserve and what the software needed to improve.</p></li>
     <li><h3>Workflows</h3><p>I turned those needs into steps a coach could start, review, and follow across the product.</p></li>
     <li><h3>Playwright automation</h3><p>I used browser automation to check expected behavior, edge cases, and failures.</p></li>
-    <li><h3>User verification</h3><p>I walked through the app as a coach and checked that the resulting records persisted after reload.</p></li>
-    <li><h3>Release</h3><p>I published the showcase and verified that the live pages and screenshots matched the reviewed commit.</p></li>
+    <li><h3>User verification</h3><p>Walk through the outcome with my cofounder to confirm it fits his coaching process. Check that the resulting records persist after reload.</p></li>
+    <li><h3>Release</h3><p>Publish the reviewed change and verify it in the live environment.</p></li>
   </ol>
   <a class="quiet-link" href="#verification">See the worked example ↓</a>
 </section>
@@ -124,12 +135,13 @@ if (await completed.count() !== 2) {
     </li>
     <li id="user-verification">
       <h3>User verification</h3>
+      <p>Walk through the saved task and stage with my cofounder to confirm they match how he wants consultation follow-up to work.</p>
       <p>Reload the coach’s contact view and check that Sam Taylor is in <strong>Consultation</strong> with the saved consultation task. The API before-and-after check returned exactly one new task.</p>
       <figure class="delivery-result"><a href="assets/powerstrong/workflow-contact-result.webp"><img src="assets/powerstrong/workflow-contact-result.webp" width="1280" height="720" alt="Reloaded CRM contact showing the Consultation stage and saved task" loading="lazy"></a><figcaption>Reloaded CRM contact and saved task</figcaption></figure>
     </li>
     <li id="release">
       <h3>Release</h3>
-      <p>Published this page to GitHub Pages. The release check verified that the public page and screenshots matched the reviewed commit. The workflow itself was exercised in the demo workspace.</p>
+      <p>Published this walkthrough to GitHub Pages and verified the live page. The workflow was exercised in the demo workspace.</p>
       <p><a class="quiet-link" href="https://github.com/brandennevius/brandennevius.github.io/commits/main/">Portfolio release history →</a></p>
     </li>
   </ol>

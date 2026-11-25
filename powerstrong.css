@@ -142,3 +142,81 @@
   .site-nav nav { width: 100%; gap: 0 12px; }
   .site-nav .author-link { border-left: 0; padding-left: 0; }
 }
+
+.engineering-v {
+  max-width: 680px;
+  margin: 0 0 26px;
+  padding: 14px clamp(9px, 3vw, 24px);
+  border: 1px solid #cbd5c4;
+  border-radius: 10px;
+  background: #eff3eb;
+}
+.engineering-v figcaption {
+  margin: 0;
+  color: var(--forest);
+  font-size: .9rem;
+  font-weight: 700;
+}
+.v-stages {
+  position: relative;
+  isolation: isolate;
+  list-style: none;
+  height: 148px;
+  margin: 7px 0 0;
+  padding: 0;
+}
+.v-stages::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: #74916b;
+  clip-path: polygon(15.8% 14%, 50% 78%, 84.2% 14%, 84.4% 16%, 50% 80%, 15.6% 16%);
+}
+.v-stages::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 15% 16% auto;
+  height: 32%;
+  border-block: 1px dashed #a6bb9e;
+}
+.v-stages li {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  transform: translate(-50%, -50%);
+  width: max-content;
+  max-width: 43%;
+  text-align: center;
+}
+.v-stages a, .v-stages span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 5px 9px;
+  border: 1px solid #b1c4a7;
+  border-radius: 6px;
+  background: #f9fbf7;
+  color: var(--forest);
+  font-size: .8rem;
+  font-weight: 650;
+  line-height: 1.18;
+}
+.v-stages a:hover, .v-stages a:focus-visible { background: #dfead7; }
+.v-stages .v-build span { background: var(--forest); border-color: var(--forest); color: #fff; }
+.v-requirements { --x: 16%; --y: 15%; }
+.v-design { --x: 32%; --y: 47%; }
+.v-build { --x: 50%; --y: 79%; }
+.v-test { --x: 68%; --y: 47%; }
+.v-verify { --x: 84%; --y: 15%; }
+.engineering-v > p { color: var(--muted); font-size: .82rem; line-height: 1.6; margin: 0; }
+.engineering-v > p a { color: var(--forest); font-weight: 650; text-decoration: underline; text-underline-offset: .16em; }
+@media (max-width: 520px) {
+  .v-stages a, .v-stages span { min-height: 42px; padding-inline: 5px; font-size: .74rem; }
+  .v-design { --x: 27%; }
+  .v-test { --x: 73%; }
+  .v-requirements { --x: 20%; }
+  .v-verify { --x: 80%; }
+}
