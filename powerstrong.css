@@ -84,10 +84,6 @@
 .browser-testing pre { max-width: 100%; overflow: auto; padding: 16px; border-radius: 8px; background: var(--forest); color: #edf4e7; font-size: .83rem; line-height: 1.6; }
 
 .engineering-page .delivery-section { margin-top: 0; }
-.delivery-nav { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 0; margin: 0 0 40px; }
-.delivery-nav li { display: flex; align-items: center; gap: 16px; }
-.delivery-nav li + li::before { content: "→"; color: var(--muted); }
-.delivery-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border: 1px solid #cbd5c4; border-radius: 6px; color: var(--forest); font-weight: 600; }
 .delivery-steps { padding-left: 1.65rem; margin: 0; }
 .delivery-steps > li { scroll-margin-top: 30px; padding: 0 0 30px 12px; margin-bottom: 24px; border-bottom: 1px solid #cbd5c4; }
 .delivery-steps > li::marker { color: var(--forest); font-weight: 700; }
@@ -100,7 +96,6 @@
 .engineering-architecture h2 { font-size: clamp(1.8rem, 4vw, 2.65rem); margin-bottom: 24px; }
 @media (max-width: 650px) {
   .delivery-gallery { grid-template-columns: 1fr; }
-  .delivery-nav li + li::before { display: none; }
   .delivery-steps > li { padding-left: 6px; }
 }
 
@@ -128,7 +123,6 @@
 .process-stages h3 { font-size: 1rem; margin: 0 0 8px; }
 .process-stages p { color: var(--muted); font-size: .9rem; line-height: 1.6; margin: 0; }
 .delivery-overview > .quiet-link { color: var(--forest); }
-.delivery-section .example-label { color: var(--forest); margin-bottom: 10px; }
 @media (max-width: 900px) { .process-stages { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .process-stages { grid-template-columns: 1fr; gap: 16px; } }
 
