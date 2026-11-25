@@ -106,6 +106,7 @@
 .architecture-intro { max-width: 75ch; color: var(--muted); }
 
 @media (min-width: 720px) {
+  .hero-copy h1 { font-size: clamp(3rem, 5.7vw, 4.125rem); }
   .hero-copy h1 em { display: block; }
 }
 
