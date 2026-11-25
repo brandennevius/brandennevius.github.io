@@ -64,9 +64,17 @@
 .browser-testing h3 { margin: 0 0 12px; }
 .browser-testing p { color: var(--muted); line-height: 1.65; margin: 0 0 10px; }
 
-.engineering-intro { margin-bottom: 42px; }
-.engineering-intro .quiet-link { display: inline-block; margin-bottom: 24px; color: var(--forest); }
-.engineering-intro h1 { font-size: clamp(2.15rem, 6vw, 4.25rem); color: var(--forest); }
+.engineering-page.section { padding-top: clamp(32px, 5vw, 64px); }
+.engineering-intro { max-width: 680px; margin-bottom: 30px; }
+.engineering-intro .quiet-link { display: inline-block; margin-bottom: 16px; color: var(--forest); }
+.engineering-intro h1 {
+  margin: 0;
+  font-size: clamp(1.9rem, 4vw, 3.1rem);
+  line-height: 1.12;
+  letter-spacing: -.045em;
+  color: var(--forest);
+}
+.engineering-intro p { margin: 10px 0 0; }
 .engineering-intro p, .engineering-link p { color: var(--muted); line-height: 1.65; }
 .engineering-link { padding-block: 50px; }
 .engineering-link p { margin-bottom: 20px; }
