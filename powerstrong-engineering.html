@@ -6,7 +6,7 @@
   <title>PowerStrongAI Engineering | Branden Nevius</title>
   <meta name="description" content="Architecture and workflow verification for PowerStrongAI, an independent coaching platform by Branden Nevius.">
   <meta name="theme-color" content="#192e25">
-  <link rel="stylesheet" href="powerstrong.css?v=20261124-workflow-edges">
+  <link rel="stylesheet" href="powerstrong.css?v=20261124-process-overview">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -14,7 +14,7 @@
   <a class="brand" href="powerstrong.html"><img src="assets/powerstrong/logo.webp" width="38" height="38" alt=""><span>PowerStrong<span class="sage">AI</span></span></a>
   <nav aria-label="Project navigation">
     <a href="powerstrong.html#tour">Product tour</a>
-    <a href="#verification">Workflow verification</a>
+    <a href="#verification">Worked example</a>
     <a class="author-link" href="index.html">Portfolio</a>
   </nav>
 </div></header>
@@ -22,9 +22,23 @@
 <section class="section wrap engineering engineering-page" aria-labelledby="engineering-title"><header class="engineering-intro">
   <a class="quiet-link" href="powerstrong.html">← Product showcase</a>
   <h1 id="engineering-title">Engineering</h1>
-  <p>How I built and verified the inquiry follow-through workflow in PowerStrongAI.</p>
+  <p>How I gathered requirements, built workflows, and verified the results in PowerStrongAI.</p>
 </header>
+
+<section class="delivery-overview" aria-labelledby="process-title">
+  <h2 id="process-title">From requirements to release</h2>
+  <ol class="process-stages">
+    <li><h3>Requirements</h3><p>I met with my cofounder to understand his coaching business. We identified what to preserve and what the software needed to improve.</p></li>
+    <li><h3>Workflows</h3><p>I turned those needs into steps a coach could start, review, and follow across the product.</p></li>
+    <li><h3>Playwright automation</h3><p>I used browser automation to check expected behavior, edge cases, and failures.</p></li>
+    <li><h3>User verification</h3><p>I walked through the app as a coach and checked that the resulting records persisted after reload.</p></li>
+    <li><h3>Release</h3><p>I published the showcase and verified that the live pages and screenshots matched the reviewed commit.</p></li>
+  </ol>
+  <a class="quiet-link" href="#verification">See the worked example ↓</a>
+</section>
+
 <section class="browser-testing delivery-section" id="verification" aria-labelledby="verification-title">
+  <p class="eyebrow example-label">Worked example</p>
   <h2 id="verification-title">Inquiry follow-through</h2>
   <ol class="delivery-nav" aria-label="Engineering workflow">
     <li><a href="#requirements">Requirements</a></li>
@@ -38,15 +52,13 @@
       <h3>Requirements</h3>
       <h4>Business goal</h4>
       <p>Help a coach turn a new inquiry into an owned follow-up. The coach should be able to see who is responsible and what still needs attention on the lead’s record.</p>
-      <h4>How the goal became requirements</h4>
-      <p>Start with the coach’s current process. Identify the decision the coach keeps, the work the software can take over, and the result the coach needs to see. For inquiry follow-through, that gives us four requirements.</p>
+      <h4>What the software needs to do</h4>
       <ul>
         <li><strong>Keep the coach in control:</strong> Let the coach choose which lead to enroll for consultation follow-up.</li>
         <li><strong>Assign the next action:</strong> Create an owned consultation task on the right contact when an email is available.</li>
         <li><strong>Show progress:</strong> Move the lead into the Consultation stage and show the result of each workflow step.</li>
         <li><strong>Handle exceptions safely:</strong> Recognize missing contact information, reject unknown contacts, and prevent duplicate work when a request is retried.</li>
       </ul>
-      <p>These requirements drive the workflow design and the acceptance checks below.</p>
     </li>
     <li id="workflows">
       <h3>Workflows</h3>

@@ -109,3 +109,25 @@
 .workflow-cases dt { font-weight: 650; }
 .workflow-cases dd { margin: 0; color: var(--muted); line-height: 1.6; }
 @media (max-width: 650px) { .workflow-cases > div { grid-template-columns: 1fr; gap: 4px; } }
+
+.delivery-overview {
+  padding: 28px 0 32px;
+  margin-bottom: 34px;
+  border-top: 1px solid #cbd5c4;
+}
+.delivery-overview h2 { font-size: clamp(1.65rem, 3.5vw, 2.35rem); margin: 0 0 22px; }
+.process-stages {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0 0 24px;
+  padding: 0;
+}
+.process-stages li { border-top: 2px solid #a9bf9b; padding-top: 12px; }
+.process-stages h3 { font-size: 1rem; margin: 0 0 8px; }
+.process-stages p { color: var(--muted); font-size: .9rem; line-height: 1.6; margin: 0; }
+.delivery-overview > .quiet-link { color: var(--forest); }
+.delivery-section .example-label { color: var(--forest); margin-bottom: 10px; }
+@media (max-width: 900px) { .process-stages { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .process-stages { grid-template-columns: 1fr; gap: 16px; } }
