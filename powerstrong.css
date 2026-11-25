@@ -54,3 +54,12 @@
 .connection { padding-top: clamp(105px, 11vw, 156px); }
 
 .engineering-grid h3.eyebrow { font-size: .75rem; margin-bottom: 12px; }
+
+.browser-testing {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid #cbd5c4;
+  max-width: 78ch;
+}
+.browser-testing h3 { margin: 0 0 12px; }
+.browser-testing p { color: var(--muted); line-height: 1.65; margin: 0 0 10px; }
