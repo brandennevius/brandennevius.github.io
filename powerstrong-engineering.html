@@ -6,7 +6,7 @@
   <title>PowerStrongAI Engineering | Branden Nevius</title>
   <meta name="description" content="Architecture and workflow verification for PowerStrongAI, an independent coaching platform by Branden Nevius.">
   <meta name="theme-color" content="#192e25">
-  <link rel="stylesheet" href="powerstrong.css?v=20261124-engineering-v">
+  <link rel="stylesheet" href="powerstrong.css?v=20261124-verification-v">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -27,16 +27,17 @@
 
 <section class="delivery-overview" aria-labelledby="process-title">
   <h2 id="process-title">From requirements to release</h2>
-  <figure class="engineering-v" aria-labelledby="v-title">
-    <figcaption id="v-title">Systems engineering V</figcaption>
+  <figure class="engineering-v" aria-label="Development and verification stages">
     <ol class="v-stages">
       <li class="v-requirements"><a href="#requirements">Requirements</a></li>
-      <li class="v-design"><a href="#workflows">Workflow design</a></li>
+      <li class="v-conops"><a href="#workflows">ConOps/User Workflows</a></li>
+      <li class="v-design"><span>Design / Specification</span></li>
       <li class="v-build"><span>Implementation</span></li>
-      <li class="v-test"><a href="#playwright">Browser checks</a></li>
+      <li class="v-unit"><span>Unit &amp; integration tests</span></li>
+      <li class="v-end-to-end"><a href="#playwright">End-to-end tests</a></li>
       <li class="v-verify"><a href="#user-verification">User verification</a></li>
     </ol>
-    <p>Requirements guide user verification. Workflow design guides browser checks. <a href="#release">Release follows verification →</a></p>
+    <p><a href="#release">Release follows verification →</a></p>
   </figure>
   <ol class="process-stages">
     <li><h3>Requirements</h3><p>I met with my cofounder to understand his coaching business. We identified what to preserve and what the software needed to improve.</p></li>

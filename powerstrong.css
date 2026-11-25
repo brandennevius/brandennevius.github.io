@@ -145,23 +145,21 @@
 
 .engineering-v {
   max-width: 680px;
-  margin: 0 0 26px;
+  margin: 0 auto 26px;
   padding: 14px clamp(9px, 3vw, 24px);
   border: 1px solid #cbd5c4;
   border-radius: 10px;
   background: #eff3eb;
 }
-.engineering-v figcaption {
-  margin: 0;
-  color: var(--forest);
-  font-size: .9rem;
-  font-weight: 700;
-}
 .v-stages {
+  --outer: 16%;
+  --middle: 27%;
+  --inner: 35%;
+  --dash: repeating-linear-gradient(to right, #a6bb9e 0 5px, transparent 5px 9px);
   position: relative;
   isolation: isolate;
   list-style: none;
-  height: 148px;
+  height: 212px;
   margin: 7px 0 0;
   padding: 0;
 }
@@ -171,15 +169,17 @@
   z-index: -1;
   inset: 0;
   background: #74916b;
-  clip-path: polygon(15.8% 14%, 50% 78%, 84.2% 14%, 84.4% 16%, 50% 80%, 15.6% 16%);
+  clip-path: polygon(var(--outer) 12%, var(--middle) 34%, var(--inner) 56%, 50% 78%, calc(100% - var(--inner)) 56%, calc(100% - var(--middle)) 34%, calc(100% - var(--outer)) 12%, calc(100% - var(--outer)) 13%, calc(100% - var(--middle)) 35%, calc(100% - var(--inner)) 57%, 50% 79%, var(--inner) 57%, var(--middle) 35%, var(--outer) 13%);
 }
 .v-stages::after {
   content: "";
   position: absolute;
   z-index: -1;
-  inset: 15% 16% auto;
-  height: 32%;
-  border-block: 1px dashed #a6bb9e;
+  inset: 0;
+  background:
+    var(--dash) center 12% / calc(100% - 2 * var(--outer)) 1px no-repeat,
+    var(--dash) center 34% / calc(100% - 2 * var(--middle)) 1px no-repeat,
+    var(--dash) center 56% / calc(100% - 2 * var(--inner)) 1px no-repeat;
 }
 .v-stages li {
   position: absolute;
@@ -206,17 +206,19 @@
 }
 .v-stages a:hover, .v-stages a:focus-visible { background: #dfead7; }
 .v-stages .v-build span { background: var(--forest); border-color: var(--forest); color: #fff; }
-.v-requirements { --x: 16%; --y: 15%; }
-.v-design { --x: 32%; --y: 47%; }
-.v-build { --x: 50%; --y: 79%; }
-.v-test { --x: 68%; --y: 47%; }
-.v-verify { --x: 84%; --y: 15%; }
-.engineering-v > p { color: var(--muted); font-size: .82rem; line-height: 1.6; margin: 0; }
+.v-requirements { --x: var(--outer); --y: 12%; }
+.v-conops { --x: var(--middle); --y: 34%; }
+.v-design { --x: var(--inner); --y: 56%; }
+.v-build { --x: 50%; --y: 78%; }
+.v-unit { --x: calc(100% - var(--inner)); --y: 56%; }
+.v-end-to-end { --x: calc(100% - var(--middle)); --y: 34%; }
+.v-verify { --x: calc(100% - var(--outer)); --y: 12%; }
+.engineering-v > p { color: var(--muted); font-size: .82rem; line-height: 1.6; margin: 0; text-align: center; }
 .engineering-v > p a { color: var(--forest); font-weight: 650; text-decoration: underline; text-underline-offset: .16em; }
-@media (max-width: 520px) {
+@media (max-width: 700px) {
+  .v-stages { --outer: 21%; --middle: 26%; --inner: 30%; height: 240px; }
+  .v-stages li { max-width: 37%; }
+  .v-stages :is(.v-design, .v-unit) { max-width: 29%; }
+  .v-stages .v-build { max-width: 60%; }
   .v-stages a, .v-stages span { min-height: 42px; padding-inline: 5px; font-size: .74rem; }
-  .v-design { --x: 27%; }
-  .v-test { --x: 73%; }
-  .v-requirements { --x: 20%; }
-  .v-verify { --x: 80%; }
 }
