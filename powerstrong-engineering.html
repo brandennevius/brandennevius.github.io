@@ -79,7 +79,7 @@
     </li>
     <li id="playwright">
       <h3>End-to-end tests</h3>
-      <p>I used Playwright to submit Nia’s intake, check the confirmation, and verify the enrollment status and each completed action in the coach’s view.</p>
+      <p>For this walkthrough, I used browser automation with Playwright locators to submit Nia’s intake, check the confirmation, and verify the enrollment and completed actions in the coach’s view.</p>
       <pre tabindex="0"><code>await intake.playwright.getByRole('button', { name: 'Submit form' }).click();
 await intake.playwright.getByRole('heading', { name: 'Thanks for submitting!' })
   .waitFor({ state: 'visible' });
@@ -119,9 +119,11 @@ if (await rows.count() !== 3) throw new Error('Expected three execution records'
     </li>
     <li id="release">
       <h3>Release</h3>
+      <p>The application release design puts regression checks before merge and deployment after merge.</p>
       <dl class="workflow-cases">
-        <div><dt>GitHub regression checks</dt><dd>The repository contains Jest and Vitest tests and a Playwright browser smoke test. The plan is to run regression checks in GitHub Actions on each push to a pull request branch and require passing checks before merging into <code>main</code>.</dd></div>
-        <div><dt>Render deployment</dt><dd>The Render Blueprint enables automatic deploys for the web app, API, and background worker when relevant files change on the linked branch. With <code>main</code> linked, a merge can trigger deployment. Render uses configured health checks for the web app and API. After deployment, smoke-test key paths in the hosted app.</dd></div>
+        <div><dt>Push a change</dt><dd>Run backend and frontend regression tests and Playwright smoke checks in GitHub Actions when commits are pushed to a pull request branch. Review the results on the pull request.</dd></div>
+        <div><dt>Merge and deploy</dt><dd>Require passing checks before merging into <code>main</code>. Render auto-deploys affected services from the linked branch, using health checks for the web app and API.</dd></div>
+        <div><dt>Verify the release</dt><dd>Smoke-test key paths in the hosted application after deployment and review service logs if a check fails.</dd></div>
       </dl>
       <p>This walkthrough is published separately on GitHub Pages.</p>
       <p><a class="quiet-link" href="https://github.com/brandennevius/brandennevius.github.io/commits/main/">Portfolio release history →</a></p>
