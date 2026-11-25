@@ -50,7 +50,8 @@
 
 <section class="browser-testing delivery-section" id="verification" aria-labelledby="verification-title">
   <p class="eyebrow example-label">Worked example</p>
-  <h2 id="verification-title">Inquiry follow-through</h2>
+  <h2 id="verification-title">Building the workflow builder</h2>
+  <p>From the coaching team’s requirements to a public intake that hands off to a named coach.</p>
   <ol class="delivery-nav" aria-label="Engineering workflow">
     <li><a href="#requirements">Requirements</a></li>
     <li><a href="#workflows">Workflows</a></li>
@@ -61,87 +62,68 @@
   <ol class="delivery-steps">
     <li id="requirements">
       <h3>Requirements</h3>
-      <h4>Business goal</h4>
-      <p>Help a coach turn a new inquiry into an owned follow-up. The coach should be able to see who is responsible and what still needs attention on the lead’s record.</p>
-      <h4>What the software needs to do</h4>
-      <ul>
-        <li><strong>Keep the coach in control:</strong> Let the coach choose which lead to enroll for consultation follow-up.</li>
-        <li><strong>Assign the next action:</strong> Create an owned consultation task on the right contact when an email is available.</li>
-        <li><strong>Show progress:</strong> Move the lead into the Consultation stage and show the result of each workflow step.</li>
-        <li><strong>Handle exceptions safely:</strong> Recognize missing contact information, reject unknown contacts, and prevent duplicate work when a request is retried.</li>
-      </ul>
+      <p>The cofounder discovery started with how leads arrive, who owns the next step, and where a coach looks when a handoff stalls. That shaped a reusable builder the team could configure for different workflows.</p>
+      <dl class="workflow-cases">
+        <div><dt>Triggers</dt><dd>Start from a selected form submission, an inbound message filtered by channel or keyword, a pipeline change, a booked appointment, or a payment. Also support manual enrollment and scheduled runs.</dd></div>
+        <div><dt>Actions</dt><dd>Configure ordered steps to create tasks, update contact fields or tags, move pipeline stages, or send a message on a configured channel. Support immediate execution, delays, and steps that wait for another event.</dd></div>
+        <div><dt>Ownership</dt><dd>Enroll the contact and route the work to a teammate. A task can use an explicit assignee or fall back to the contact owner.</dd></div>
+        <div><dt>Execution visibility</dt><dd>Show enrolled contacts, their status, and current step. Keep a timestamped history of individual actions with the outcome and any error.</dd></div>
+      </dl>
     </li>
     <li id="workflows">
       <h3>Workflows</h3>
-      <p>The coach starts the workflow by enrolling a lead. The first step checks for an email before creating the consultation task. The second step updates the CRM stage independently. The execution history records both outcomes.</p>
+      <h4>Coaching intake to consultation</h4>
+      <p>When a prospect submits the Northstar Coaching Intake, enroll the matched contact. Apply the <strong>Intake received</strong> tag, assign Casey Lee a consultation-prep task, and move the contact to <strong>Consultation</strong>. Each action runs immediately. I set Casey’s task assignment through the workflow API.</p>
       <div class="delivery-gallery">
-        <figure><a href="assets/powerstrong/workflow-structure.webp"><img src="assets/powerstrong/workflow-structure.webp" width="1280" height="720" alt="Workflow builder showing the email condition, consultation follow-up, and stage change" loading="lazy"></a><figcaption>Workflow builder</figcaption></figure>
-        <figure><a href="assets/powerstrong/workflow-execution.webp"><img src="assets/powerstrong/workflow-execution.webp" width="1280" height="720" alt="Execution history showing both workflow steps completed" loading="lazy"></a><figcaption>Execution history</figcaption></figure>
+        <figure><a href="assets/powerstrong/intake-form.webp"><img src="assets/powerstrong/intake-form.webp" width="1280" height="720" alt="Public coaching intake filled out by fictional prospect Nia Brooks" loading="lazy"></a><figcaption>Public intake</figcaption></figure>
+        <figure><a href="assets/powerstrong/intake-builder.webp"><img src="assets/powerstrong/intake-builder.webp" width="1280" height="720" alt="Builder showing the selected intake form trigger and three configured actions" loading="lazy"></a><figcaption>Trigger and ordered actions</figcaption></figure>
+        <figure><a href="assets/powerstrong/intake-enrollment.webp"><img src="assets/powerstrong/intake-enrollment.webp" width="1280" height="720" alt="Enrollments table showing Nia’s run completed at step three of three" loading="lazy"></a><figcaption>Enrollment at step 3 of 3</figcaption></figure>
+        <figure><a href="assets/powerstrong/intake-executions.webp"><img src="assets/powerstrong/intake-executions.webp" width="1280" height="720" alt="Execution timeline showing three completed steps for Nia Brooks" loading="lazy"></a><figcaption>Execution status for each action</figcaption></figure>
       </div>
-      <pre tabindex="0"><code>CREATE_TASK   COMPLETED
-CHANGE_STAGE  COMPLETED</code></pre>
-      <h4>Edge cases and unhappy path</h4>
-      <dl class="workflow-cases">
-        <div><dt>Blank email</dt><dd><strong>Pass.</strong> Task skipped, zero tasks created, and stage moved to Consultation.</dd></div>
-        <div><dt>Social lead with placeholder email</dt><dd><strong>Failed acceptance check.</strong> The presence check treated the placeholder as an email and created one task.</dd></div>
-        <div><dt>Retry with the same key</dt><dd><strong>Pass.</strong> The API returned the same enrollment ID. One enrollment and one task remained.</dd></div>
-        <div><dt>Unknown contact</dt><dd><strong>Pass.</strong> The API returned HTTP 404 and created no enrollment.</dd></div>
-      </dl>
-      <figure class="delivery-result">
-        <a href="assets/powerstrong/workflow-edge-timeline.webp"><img src="assets/powerstrong/workflow-edge-timeline.webp" width="1280" height="720" alt="Execution timeline showing a skipped task for Taylor and completed task steps for Rowan and Drew" loading="lazy"></a>
-        <figcaption>Execution timeline for the edge-case fixtures in the same workflow.</figcaption>
-      </figure>
     </li>
     <li id="playwright">
       <h3>Playwright automation</h3>
-      <p>This browser check opens Sam Taylor’s execution timeline and verifies the two completed steps from the run above.</p>
-      <pre tabindex="0"><code>await tab.goto(workflowUrl);
-await tab.playwright.getByRole(&#x27;button&#x27;, {
-  name: &#x27;Execution Timeline&#x27;, exact: true,
-}).click();
+      <p>In the fictional Northstar workspace, I submitted Nia’s intake through the browser, checked the confirmation, then asserted the enrollment status and each completed action in the coach’s view.</p>
+      <pre tabindex="0"><code>await intake.playwright.getByRole('button', { name: 'Submit form' }).click();
+await intake.playwright.getByRole('heading', { name: 'Thanks for submitting!' })
+  .waitFor({ state: 'visible' });
 
-const completed = tab.playwright.getByRole(&#x27;row&#x27;)
-  .filter({ hasText: &#x27;Sam Taylor&#x27; })
-  .filter({ hasText: &#x27;COMPLETED&#x27; });
+await workflow.playwright.getByRole('button', { name: 'Enrollments (1)' }).click();
+const enrollment = workflow.playwright.getByRole('row')
+  .filter({ hasText: 'nia@northstar.example.com' });
+await enrollment.getByRole('cell', { name: 'COMPLETED', exact: true })
+  .waitFor({ state: 'visible' });
+await enrollment.getByRole('cell', { name: 'Step 3 of 3', exact: true })
+  .waitFor({ state: 'visible' });
 
+await workflow.playwright.getByRole('button', { name: 'Execution Timeline' }).click();
+const rows = workflow.playwright.getByRole('row').filter({ hasText: 'Nia Brooks' });
 for (const step of [
-  &#x27;Create the consultation follow-up&#x27;,
-  &#x27;Move the contact to Consultation&#x27;,
+  'Tag the coaching intake',
+  'Assign intake review to Casey Lee',
+  'Move lead to Consultation',
 ]) {
-  await completed.filter({ hasText: step }).waitFor({ state: &#x27;visible&#x27; });
+  await rows.filter({ hasText: step })
+    .getByRole('cell', { name: 'COMPLETED', exact: true })
+    .waitFor({ state: 'visible' });
 }
-if (await completed.count() !== 2) {
-  throw new Error(&#x27;Expected exactly two completed steps for Sam&#x27;);
-}</code></pre>
-      <h4>Browser checks for the edge cases</h4>
-      <p>The timeline check records what each run actually did. Rowan’s completed task reproduces the placeholder-email failure.</p>
-      <pre tabindex="0"><code>for (const [lead, observedStatus] of [
-  [&#x27;Taylor&#x27;, &#x27;SKIPPED&#x27;],
-  [&#x27;Rowan&#x27;, &#x27;COMPLETED&#x27;],
-  [&#x27;Drew&#x27;, &#x27;COMPLETED&#x27;],
-]) {
-  const rows = tab.playwright.getByRole(&#x27;row&#x27;, {
-    name: new RegExp(&#x27;^&#x27; + lead + &#x27; &#x27;),
-  });
-  await rows.filter({ hasText: &#x27;Create the consultation follow-up&#x27; })
-    .getByRole(&#x27;cell&#x27;, { name: observedStatus, exact: true })
-    .waitFor({ state: &#x27;visible&#x27; });
-  await rows.filter({ hasText: &#x27;Move the contact to Consultation&#x27; })
-    .getByRole(&#x27;cell&#x27;, { name: &#x27;COMPLETED&#x27;, exact: true })
-    .waitFor({ state: &#x27;visible&#x27; });
-  if (await rows.count() !== 2) throw new Error(lead + &#x27; has unexpected execution count&#x27;);
-}</code></pre>
-      <p>I checked the same-key retry and the unknown-contact rejection through the API. The browser checks read completed demo runs.</p>
+if (await rows.count() !== 3) throw new Error('Expected three execution records');</code></pre>
+      <h4>Acceptance checks</h4>
+      <dl class="workflow-cases">
+        <div><dt>Selected form</dt><dd>One completed enrollment, three completed actions, and one task assigned to Casey.</dd></div>
+        <div><dt>Different form</dt><dd>The general inquiry submitted successfully (HTTP 201). The intake workflow still showed only Nia’s enrollment.</dd></div>
+        <div><dt>Missing required email</dt><dd>The intake API returned HTTP 400. The submission count stayed the same and no workflow actions ran for that attempt.</dd></div>
+      </dl>
     </li>
     <li id="user-verification">
       <h3>User verification</h3>
-      <p>Walk through the saved task and stage with my cofounder to confirm they match how he wants consultation follow-up to work.</p>
-      <p>Reload the coach’s contact view and check that Sam Taylor is in <strong>Consultation</strong> with the saved consultation task. The API before-and-after check returned exactly one new task.</p>
-      <figure class="delivery-result"><a href="assets/powerstrong/workflow-contact-result.webp"><img src="assets/powerstrong/workflow-contact-result.webp" width="1280" height="720" alt="Reloaded CRM contact showing the Consultation stage and saved task" loading="lazy"></a><figcaption>Reloaded CRM contact and saved task</figcaption></figure>
+      <p>I reopened Nia’s CRM contact and confirmed the Consultation stage and Casey’s task persisted. The API also returned the saved tag, assignee, and exactly one matching task.</p>
+      <p>The cofounder walkthrough checks whether Casey can find the lead, see who owns the follow-up, and tell what needs to happen next.</p>
+      <figure class="delivery-result"><a href="assets/powerstrong/intake-contact.webp"><img src="assets/powerstrong/intake-contact.webp" width="1280" height="720" alt="Reopened Nia Brooks contact in Consultation with an intake review task assigned to Casey Lee" loading="lazy"></a><figcaption>Consultation handoff on the reloaded contact</figcaption></figure>
     </li>
     <li id="release">
       <h3>Release</h3>
-      <p>Published this walkthrough to GitHub Pages and verified the live page. The workflow was exercised in the demo workspace.</p>
+      <p>The workflow ran in the fictional Northstar workspace. The walkthrough is published on GitHub Pages.</p>
       <p><a class="quiet-link" href="https://github.com/brandennevius/brandennevius.github.io/commits/main/">Portfolio release history →</a></p>
     </li>
   </ol>
