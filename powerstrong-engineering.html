@@ -6,7 +6,7 @@
   <title>PowerStrongAI Engineering | Branden Nevius</title>
   <meta name="description" content="Architecture and workflow verification for PowerStrongAI, an independent coaching platform by Branden Nevius.">
   <meta name="theme-color" content="#192e25">
-  <link rel="stylesheet" href="powerstrong.css?v=20261124-engineering">
+  <link rel="stylesheet" href="powerstrong.css?v=20261124-delivery">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -22,33 +22,42 @@
 <section class="section wrap engineering engineering-page" aria-labelledby="engineering-title"><header class="engineering-intro">
   <a class="quiet-link" href="powerstrong.html">← Product showcase</a>
   <h1 id="engineering-title">PowerStrongAI engineering</h1>
-  <p>System architecture and how I verified the coaching workflows.</p>
+  <p>From acceptance criteria to workflow evidence, browser checks, and release.</p>
 </header>
-<div class="architecture" aria-label="Application architecture"><div class="arch-experiences"><div><small>COACH EXPERIENCE</small><strong>Next.js + React</strong><span>Workspace operations</span></div><div><small>CLIENT EXPERIENCE</small><strong>Expo + React Native</strong><span>Training and progress</span></div></div><div class="arch-bridge">Shared API and domain context</div><div class="arch-api"><small>APPLICATION LAYER</small><strong>NestJS API</strong><span>JWT authentication · roles · entitlements · tenant-scoped services</span></div><div class="arch-foundations"><div><strong>PostgreSQL + Prisma</strong><span>Relationships, purchases, programs, and session records</span></div><div><strong>Redis + BullMQ</strong><span>Message, scoring, and transcription jobs</span></div><div><strong>Workflow engine</strong><span>Event enrollments and persisted scheduled steps</span></div></div><div class="providers"><span>Stripe</span><span>Twilio</span><span>Google</span><span>Meta / Instagram</span><span>OpenAI</span><span>ElevenLabs</span></div></div>
-<div class="engineering-grid"><article><h3 class="eyebrow">TENANCY & AI</h3><p>Workspace context follows requests through role and entitlement guards into explicitly tenant-scoped services. Copilot tools operate within that same application context.</p></article><article><h3 class="eyebrow">PAYMENTS & EVENTS</h3><p>Signed Stripe webhooks, duplicate-event checks, and purchase reconciliation paths connect provider events to workspace records and downstream workflows.</p></article><article><h3 class="eyebrow">PROGRAM LIFECYCLES</h3><p>Templates, client assignments, and completed workouts have separate lifecycles. Replacement and synchronization rules account for session progress and locks.</p></article></div>
-<section class="browser-testing" id="verification" aria-labelledby="verification-title">
-  <h2 id="verification-title">Workflow verification</h2>
-  <h3>Inquiry follow-through</h3>
-  <ol class="engineering-proof">
-    <li>
-      <h4>Configure</h4>
-      <p>Manual enrollment. Check for an email, create a consultation task, then move the lead to Consultation.</p>
-      <a href="assets/powerstrong/workflow-structure.webp"><img src="assets/powerstrong/workflow-structure.webp" width="1280" height="720" alt="Workflow builder showing the email condition, consultation follow-up, and stage change" loading="lazy"></a>
-    </li>
-    <li>
-      <h4>Run</h4>
-      <p>Sam Taylor was enrolled once. The execution API recorded both steps as completed.</p>
-      <a href="assets/powerstrong/workflow-execution.webp"><img src="assets/powerstrong/workflow-execution.webp" width="1280" height="720" alt="Execution history showing both workflow steps completed" loading="lazy"></a>
-    </li>
-    <li>
-      <h4>Verify after reload</h4>
-      <p>One new task, “Book Sam’s coaching consultation.” Stage changed from New inquiry to Consultation.</p>
-      <a href="assets/powerstrong/workflow-contact-result.webp"><img src="assets/powerstrong/workflow-contact-result.webp" width="1280" height="720" alt="Reloaded CRM contact showing the Consultation stage and saved task" loading="lazy"></a>
-    </li>
+<section class="browser-testing delivery-section" id="verification" aria-labelledby="verification-title">
+  <h2 id="verification-title">Inquiry follow-through</h2>
+  <ol class="delivery-nav" aria-label="Engineering workflow">
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#workflows">Workflows</a></li>
+    <li><a href="#playwright">Playwright automation</a></li>
+    <li><a href="#user-verification">User verification</a></li>
+    <li><a href="#release">Release</a></li>
   </ol>
-  <h3>Playwright smoke test</h3>
-  <p><code>tests/e2e/assistant-guided.spec.ts</code></p>
-  <pre tabindex="0"><code>test(&#x27;dashboard surfaces assistant mode and intelligence summary&#x27;, async ({ page }) =&gt; {
+  <ol class="delivery-steps">
+    <li id="requirements">
+      <h3>Requirements</h3>
+      <p>Give the coach an assigned follow-up after a lead inquiry and record what happened.</p>
+      <ul>
+        <li>Start the workflow through manual enrollment.</li>
+        <li>When the lead has an email, create one consultation task on the contact.</li>
+        <li>Move the lead to <strong>Consultation</strong> and show the result of each step.</li>
+      </ul>
+    </li>
+    <li id="workflows">
+      <h3>Workflows</h3>
+      <p>Configure the email condition and two immediate actions. Enroll a demo lead and inspect the execution history.</p>
+      <div class="delivery-gallery">
+        <figure><a href="assets/powerstrong/workflow-structure.webp"><img src="assets/powerstrong/workflow-structure.webp" width="1280" height="720" alt="Workflow builder showing the email condition, consultation follow-up, and stage change" loading="lazy"></a><figcaption>Workflow builder</figcaption></figure>
+        <figure><a href="assets/powerstrong/workflow-execution.webp"><img src="assets/powerstrong/workflow-execution.webp" width="1280" height="720" alt="Execution history showing both workflow steps completed" loading="lazy"></a><figcaption>Execution history</figcaption></figure>
+      </div>
+      <pre tabindex="0"><code>CREATE_TASK   COMPLETED
+CHANGE_STAGE  COMPLETED</code></pre>
+    </li>
+    <li id="playwright">
+      <h3>Playwright automation</h3>
+      <p>Checked-in smoke coverage for the signed-in assistant screens. This test checks the dashboard queue and guided mode after login.</p>
+      <p><code>tests/e2e/assistant-guided.spec.ts</code></p>
+      <pre tabindex="0"><code>test(&#x27;dashboard surfaces assistant mode and intelligence summary&#x27;, async ({ page }) =&gt; {
   await login(page);
   await page.goto(`${baseUrl}/dashboard`);
 
@@ -56,7 +65,24 @@
   await expect(page.getByText(/Suggest only|Guided|Policy automation/i).first()).toBeVisible();
   await expect(page.getByText(/Assistant tasks/i)).toBeVisible();
 });</code></pre>
-  <p>The suite covers signed-in assistant screens. The workflow run above was verified separately through the app and API.</p>
+      <p>Playwright retains traces, screenshots, and video on failure. The enrollment and CRM checks for this run were verified separately in the browser and API.</p>
+    </li>
+    <li id="user-verification">
+      <h3>User verification</h3>
+      <p>Reload the coach’s contact view and check that Sam Taylor is in <strong>Consultation</strong> with the saved consultation task. The API before-and-after check returned exactly one new task.</p>
+      <figure class="delivery-result"><a href="assets/powerstrong/workflow-contact-result.webp"><img src="assets/powerstrong/workflow-contact-result.webp" width="1280" height="720" alt="Reloaded CRM contact showing the Consultation stage and saved task" loading="lazy"></a><figcaption>Reloaded CRM contact and saved task</figcaption></figure>
+    </li>
+    <li id="release">
+      <h3>Release</h3>
+      <p>Published the verified workflow evidence to GitHub Pages. The release check compares the public page and its screenshot assets to the reviewed commit.</p>
+      <p><a class="quiet-link" href="https://github.com/brandennevius/brandennevius.github.io/commits/main/">Portfolio release history →</a></p>
+    </li>
+  </ol>
+</section>
+<section class="engineering-architecture" aria-labelledby="architecture-title">
+  <h2 id="architecture-title">System architecture</h2>
+  <div class="architecture" aria-label="Application architecture"><div class="arch-experiences"><div><small>COACH EXPERIENCE</small><strong>Next.js + React</strong><span>Workspace operations</span></div><div><small>CLIENT EXPERIENCE</small><strong>Expo + React Native</strong><span>Training and progress</span></div></div><div class="arch-bridge">Shared API and domain context</div><div class="arch-api"><small>APPLICATION LAYER</small><strong>NestJS API</strong><span>JWT authentication · roles · entitlements · tenant-scoped services</span></div><div class="arch-foundations"><div><strong>PostgreSQL + Prisma</strong><span>Relationships, purchases, programs, and session records</span></div><div><strong>Redis + BullMQ</strong><span>Message, scoring, and transcription jobs</span></div><div><strong>Workflow engine</strong><span>Event enrollments and persisted scheduled steps</span></div></div><div class="providers"><span>Stripe</span><span>Twilio</span><span>Google</span><span>Meta / Instagram</span><span>OpenAI</span><span>ElevenLabs</span></div></div>
+<div class="engineering-grid"><article><h3 class="eyebrow">TENANCY & AI</h3><p>Workspace context follows requests through role and entitlement guards into explicitly tenant-scoped services. Copilot tools operate within that same application context.</p></article><article><h3 class="eyebrow">PAYMENTS & EVENTS</h3><p>Signed Stripe webhooks, duplicate-event checks, and purchase reconciliation paths connect provider events to workspace records and downstream workflows.</p></article><article><h3 class="eyebrow">PROGRAM LIFECYCLES</h3><p>Templates, client assignments, and completed workouts have separate lifecycles. Replacement and synchronization rules account for session progress and locks.</p></article></div>
 </section>
 </section>
 </main>

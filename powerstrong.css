@@ -73,10 +73,25 @@
 
 .engineering-page .browser-testing { max-width: none; }
 .browser-testing h2 { font-size: clamp(1.8rem, 4vw, 2.65rem); margin-bottom: 28px; }
-.engineering-proof { list-style: none; padding: 0; margin: 16px 0 36px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-.engineering-proof li { padding: 16px; border: 1px solid #cbd5c4; border-radius: 10px; display: flex; flex-direction: column; }
-.engineering-proof h4 { margin: 0 0 6px; }
-.engineering-proof a { display: block; margin-top: auto; }
-.engineering-proof img { display: block; width: 100%; height: auto; border-radius: 5px; }
 .browser-testing pre { max-width: 100%; overflow: auto; padding: 16px; border-radius: 8px; background: var(--forest); color: #edf4e7; font-size: .83rem; line-height: 1.6; }
-@media (max-width: 760px) { .engineering-proof { grid-template-columns: 1fr; } }
+
+.engineering-page .delivery-section { margin-top: 0; }
+.delivery-nav { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 0; margin: 0 0 40px; }
+.delivery-nav li { display: flex; align-items: center; gap: 16px; }
+.delivery-nav li + li::before { content: "→"; color: var(--muted); }
+.delivery-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border: 1px solid #cbd5c4; border-radius: 6px; color: var(--forest); font-weight: 600; }
+.delivery-steps { padding-left: 1.65rem; margin: 0; }
+.delivery-steps > li { scroll-margin-top: 30px; padding: 0 0 30px 12px; margin-bottom: 24px; border-bottom: 1px solid #cbd5c4; }
+.delivery-steps > li::marker { color: var(--forest); font-weight: 700; }
+.delivery-steps ul { margin: 12px 0 0; padding-left: 20px; color: var(--muted); line-height: 1.65; }
+.delivery-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin: 20px 0; }
+.delivery-gallery figure, .delivery-result { margin: 0; }
+.delivery-result { max-width: 720px; margin-top: 20px; }
+.delivery-gallery img, .delivery-result img { display: block; width: 100%; height: auto; border: 1px solid #cbd5c4; border-radius: 8px; }
+.engineering-architecture { padding-top: 18px; }
+.engineering-architecture h2 { font-size: clamp(1.8rem, 4vw, 2.65rem); margin-bottom: 24px; }
+@media (max-width: 650px) {
+  .delivery-gallery { grid-template-columns: 1fr; }
+  .delivery-nav li + li::before { display: none; }
+  .delivery-steps > li { padding-left: 6px; }
+}
