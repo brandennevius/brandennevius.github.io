@@ -38,7 +38,7 @@ If this repository is named `brandennevius.github.io`, pushing `main` will publi
 
 Run `python3 -m http.server 4173` and open `/powerstrong.html`. No build step is required. The page includes a five-step product tour and a four-example prompt-to-result agent tour with keyboard-accessible tabs, a native screenshot dialog, and responsive layouts.
 
-Screenshots in `assets/powerstrong/` use an isolated fictional Northstar Coaching workspace. Purchases, message history, coaching examples, and the editable reply draft are seeded samples; Copilot shows a verified live model response, and external messaging providers are disconnected. No customer data is used. The program assignment was created through the local API. Capabilities described beyond the captures are grounded in repository implementation, not claimed as live provider validation.
+The captures in `assets/powerstrong/` come from the Northstar Coaching workspace and contain no customer data. Copilot shows a verified live model response. External messaging providers are disconnected. The program assignment was created through the local API. Capabilities described beyond the captures are grounded in repository implementation, not claimed as live provider validation.
 
 Source review baseline: PowerStrongAI `4e96233019f4a749e6fc134806b62543b9e73a99`, plus local theme refinements. For the Copilot capture only, development debug output was disabled in the isolated preview copy to match its existing production display behavior. The model response was not rewritten. Inline bold formatting is rendered by the shared Copilot component.
 

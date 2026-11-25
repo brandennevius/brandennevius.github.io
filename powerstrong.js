@@ -30,7 +30,7 @@
       const source = button.querySelector('img');
       enlarged.src = source.currentSrc || source.src;
       enlarged.alt = source.alt;
-      caption.textContent = button.closest('figure')?.querySelector('figcaption')?.textContent || 'PowerStrongAI · Fictional demonstration workspace';
+      caption.textContent = button.closest('figure')?.querySelector('figcaption')?.textContent || 'PowerStrongAI workspace';
       dialog.showModal();
     });
   });

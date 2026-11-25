@@ -71,7 +71,7 @@
       <h4>Coaching intake to consultation</h4>
       <p>When a prospect submits the Northstar Coaching Intake, enroll the matched contact. Apply the <strong>Intake received</strong> tag, assign Casey Lee a consultation-prep task, and move the contact to <strong>Consultation</strong>. Each action runs immediately. I set Casey’s task assignment through the workflow API.</p>
       <div class="delivery-gallery">
-        <figure><a href="assets/powerstrong/intake-form.webp"><img src="assets/powerstrong/intake-form.webp" width="1280" height="720" alt="Public coaching intake filled out by fictional prospect Nia Brooks" loading="lazy"></a><figcaption>Public intake</figcaption></figure>
+        <figure><a href="assets/powerstrong/intake-form.webp"><img src="assets/powerstrong/intake-form.webp" width="1280" height="720" alt="Public coaching intake filled out by Nia Brooks" loading="lazy"></a><figcaption>Public intake</figcaption></figure>
         <figure><a href="assets/powerstrong/intake-builder.webp"><img src="assets/powerstrong/intake-builder.webp" width="1280" height="720" alt="Builder showing the selected intake form trigger and three configured actions" loading="lazy"></a><figcaption>Trigger and ordered actions</figcaption></figure>
         <figure><a href="assets/powerstrong/intake-enrollment.webp"><img src="assets/powerstrong/intake-enrollment.webp" width="1280" height="720" alt="Enrollments table showing Nia’s run completed at step three of three" loading="lazy"></a><figcaption>Enrollment at step 3 of 3</figcaption></figure>
         <figure><a href="assets/powerstrong/intake-executions.webp"><img src="assets/powerstrong/intake-executions.webp" width="1280" height="720" alt="Execution timeline showing three completed steps for Nia Brooks" loading="lazy"></a><figcaption>Execution status for each action</figcaption></figure>
@@ -79,7 +79,7 @@
     </li>
     <li id="playwright">
       <h3>End-to-end tests</h3>
-      <p>I used Playwright in the fictional Northstar workspace to submit Nia’s intake, check the confirmation, and verify the enrollment status and each completed action in the coach’s view.</p>
+      <p>I used Playwright to submit Nia’s intake, check the confirmation, and verify the enrollment status and each completed action in the coach’s view.</p>
       <pre tabindex="0"><code>await intake.playwright.getByRole('button', { name: 'Submit form' }).click();
 await intake.playwright.getByRole('heading', { name: 'Thanks for submitting!' })
   .waitFor({ state: 'visible' });
@@ -119,7 +119,7 @@ if (await rows.count() !== 3) throw new Error('Expected three execution records'
     </li>
     <li id="release">
       <h3>Release</h3>
-      <p>The workflow ran in the fictional Northstar workspace. The walkthrough is published on GitHub Pages.</p>
+      <p>The walkthrough is published on GitHub Pages.</p>
       <p><a class="quiet-link" href="https://github.com/brandennevius/brandennevius.github.io/commits/main/">Portfolio release history →</a></p>
     </li>
   </ol>
