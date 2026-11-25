@@ -6,7 +6,7 @@
   <title>PowerStrongAI Engineering | Branden Nevius</title>
   <meta name="description" content="Architecture and workflow verification for PowerStrongAI, an independent coaching platform by Branden Nevius.">
   <meta name="theme-color" content="#192e25">
-  <link rel="stylesheet" href="powerstrong.css?v=20261124-verification-v">
+  <link rel="stylesheet" href="powerstrong.css?v=20261124-process-stages">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -41,9 +41,12 @@
   </figure>
   <ol class="process-stages">
     <li><h3>Requirements</h3><p>I met with my cofounder to understand his coaching business. We identified what to preserve and what the software needed to improve.</p></li>
-    <li><h3>Workflows</h3><p>I turned those needs into steps a coach could start, review, and follow across the product.</p></li>
-    <li><h3>Playwright automation</h3><p>I used browser automation to check expected behavior, edge cases, and failures.</p></li>
-    <li><h3>User verification</h3><p>Walk through the outcome with my cofounder to confirm it fits his coaching process. Check that the resulting records persist after reload.</p></li>
+    <li><h3>ConOps/User Workflows</h3><p>I mapped how leads come in, who takes the next step, and how the coach tracks the handoff.</p></li>
+    <li><h3>Design / Specification</h3><p>I defined what starts a workflow, how actions run, and what the coach sees when a step succeeds or fails.</p></li>
+    <li><h3>Implementation</h3><p>I built the workflow editor, event-based enrollment, and execution history across the app and API.</p></li>
+    <li><h3>Unit &amp; integration tests</h3><p>Unit tests check individual action rules. API checks verify that a submission creates the expected enrollment, task, and CRM updates.</p></li>
+    <li><h3>End-to-end tests</h3><p>I used Playwright to submit the intake in the browser and verify that the coach could see the completed workflow and assigned follow-up.</p></li>
+    <li><h3>User verification</h3><p>Walk through the handoff with my cofounder to confirm it fits his coaching process.</p></li>
     <li><h3>Release</h3><p>Publish the reviewed change and verify it in the live environment.</p></li>
   </ol>
   <a class="quiet-link" href="#verification">See the worked example ↓</a>
@@ -56,7 +59,7 @@
   <ol class="delivery-nav" aria-label="Engineering workflow">
     <li><a href="#requirements">Requirements</a></li>
     <li><a href="#workflows">Workflows</a></li>
-    <li><a href="#playwright">Playwright automation</a></li>
+    <li><a href="#playwright">End-to-end tests</a></li>
     <li><a href="#user-verification">User verification</a></li>
     <li><a href="#release">Release</a></li>
   </ol>
@@ -83,8 +86,8 @@
       </div>
     </li>
     <li id="playwright">
-      <h3>Playwright automation</h3>
-      <p>In the fictional Northstar workspace, I submitted Nia’s intake through the browser, checked the confirmation, then asserted the enrollment status and each completed action in the coach’s view.</p>
+      <h3>End-to-end tests</h3>
+      <p>I used Playwright in the fictional Northstar workspace to submit Nia’s intake, check the confirmation, and verify the enrollment status and each completed action in the coach’s view.</p>
       <pre tabindex="0"><code>await intake.playwright.getByRole('button', { name: 'Submit form' }).click();
 await intake.playwright.getByRole('heading', { name: 'Thanks for submitting!' })
   .waitFor({ state: 'visible' });
