@@ -6,15 +6,16 @@
   <title>PowerStrongAI Engineering | Branden Nevius</title>
   <meta name="description" content="Architecture and workflow verification for PowerStrongAI, an independent coaching platform by Branden Nevius.">
   <meta name="theme-color" content="#192e25">
-  <link rel="stylesheet" href="powerstrong.css?v=20261124-process-stages">
+  <link rel="stylesheet" href="powerstrong.css?v=20261124-architecture">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-nav"><div class="wrap nav-inner">
+<header class="site-nav engineering-nav"><div class="wrap nav-inner">
   <a class="brand" href="powerstrong.html"><img src="assets/powerstrong/logo.webp" width="38" height="38" alt=""><span>PowerStrong<span class="sage">AI</span></span></a>
   <nav aria-label="Project navigation">
     <a href="powerstrong.html#tour">Product tour</a>
     <a href="#verification">Worked example</a>
+    <a href="#architecture">System architecture</a>
     <a class="author-link" href="index.html">Portfolio</a>
   </nav>
 </div></header>
@@ -123,10 +124,18 @@ if (await rows.count() !== 3) throw new Error('Expected three execution records'
     </li>
   </ol>
 </section>
-<section class="engineering-architecture" aria-labelledby="architecture-title">
+<section class="engineering-architecture" id="architecture" aria-labelledby="architecture-title">
   <h2 id="architecture-title">System architecture</h2>
+  <p class="architecture-intro">Coaches work in a Next.js web app and clients train in an Expo mobile app. Both use the same NestJS API, which applies workspace permissions and keeps records tied to the tenant that owns them.</p>
   <div class="architecture" aria-label="Application architecture"><div class="arch-experiences"><div><small>COACH EXPERIENCE</small><strong>Next.js + React</strong><span>Workspace operations</span></div><div><small>CLIENT EXPERIENCE</small><strong>Expo + React Native</strong><span>Training and progress</span></div></div><div class="arch-bridge">Shared API and domain context</div><div class="arch-api"><small>APPLICATION LAYER</small><strong>NestJS API</strong><span>JWT authentication · roles · entitlements · tenant-scoped services</span></div><div class="arch-foundations"><div><strong>PostgreSQL + Prisma</strong><span>Relationships, purchases, programs, and session records</span></div><div><strong>Redis + BullMQ</strong><span>Message, scoring, and transcription jobs</span></div><div><strong>Workflow engine</strong><span>Event enrollments and persisted scheduled steps</span></div></div><div class="providers"><span>Stripe</span><span>Twilio</span><span>Google</span><span>Meta / Instagram</span><span>OpenAI</span><span>ElevenLabs</span></div></div>
-<div class="engineering-grid"><article><h3 class="eyebrow">TENANCY & AI</h3><p>Workspace context follows requests through role and entitlement guards into explicitly tenant-scoped services. Copilot tools operate within that same application context.</p></article><article><h3 class="eyebrow">PAYMENTS & EVENTS</h3><p>Signed Stripe webhooks, duplicate-event checks, and purchase reconciliation paths connect provider events to workspace records and downstream workflows.</p></article><article><h3 class="eyebrow">PROGRAM LIFECYCLES</h3><p>Templates, client assignments, and completed workouts have separate lifecycles. Replacement and synchronization rules account for session progress and locks.</p></article></div>
+  <h3 class="architecture-flow-title">How an intake reaches the coach</h3>
+  <ol class="process-stages architecture-flow">
+    <li><h4>Save the submission</h4><p>The API checks the public form’s required fields, finds or creates the contact, and stores the answers under that workspace.</p></li>
+    <li><h4>Match the trigger</h4><p>The workflow engine looks for active workflows configured for that form. A match enrolls the contact and starts the ordered actions.</p></li>
+    <li><h4>Record the results</h4><p>The engine saves each step’s status in PostgreSQL. The app reads those records to show the timeline alongside the updated contact and assigned task.</p></li>
+  </ol>
+  <p class="architecture-intro">The engine also stores delayed steps with a scheduled time so a poller can pick them up later. Redis and BullMQ handle background jobs such as message delivery, lead scoring, and transcription.</p>
+  <div class="engineering-grid"><article><h3 class="eyebrow">TENANCY &amp; AI</h3><p>Workspace context follows requests through role and entitlement guards into explicitly tenant-scoped services. Copilot tools operate within that same application context.</p></article><article><h3 class="eyebrow">PAYMENTS &amp; EVENTS</h3><p>Signed Stripe webhooks, duplicate-event checks, and purchase reconciliation paths connect provider events to workspace records and downstream workflows.</p></article><article><h3 class="eyebrow">PROGRAM LIFECYCLES</h3><p>Templates, client assignments, and completed workouts have separate lifecycles. Replacement and synchronization rules account for session progress and locks.</p></article></div>
 </section>
 </section>
 </main>
