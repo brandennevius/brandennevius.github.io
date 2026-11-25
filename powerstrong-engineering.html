@@ -6,7 +6,7 @@
   <title>PowerStrongAI Engineering | Branden Nevius</title>
   <meta name="description" content="Architecture and workflow verification for PowerStrongAI, an independent coaching platform by Branden Nevius.">
   <meta name="theme-color" content="#192e25">
-  <link rel="stylesheet" href="powerstrong.css?v=20261124-mobile-portfolio">
+  <link rel="stylesheet" href="powerstrong.css?v=20261125-deployment">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -79,7 +79,7 @@
     </li>
     <li id="playwright">
       <h3>End-to-end tests</h3>
-      <p>For this walkthrough, I used browser automation with Playwright locators to submit Nia’s intake, check the confirmation, and verify the enrollment and completed actions in the coach’s view.</p>
+      <p>Playwright submitted Nia’s intake, checked the confirmation, and verified the enrollment and completed actions in the coach’s view.</p>
       <pre tabindex="0"><code>await intake.playwright.getByRole('button', { name: 'Submit form' }).click();
 await intake.playwright.getByRole('heading', { name: 'Thanks for submitting!' })
   .waitFor({ state: 'visible' });
@@ -146,12 +146,65 @@ if (await rows.count() !== 3) throw new Error('Expected three execution records'
       <p>Provider integrations connect payments, messaging, calendars, and AI to the workspace. For example, the billing service verifies signed Stripe webhooks and reconciles purchases with the matching contact and offer.</p>
     </article>
   </div>
-  <h3>Deployment infrastructure</h3>
-  <dl class="workflow-cases">
-    <div><dt>Render web services</dt><dd>Next.js and NestJS run as separate Node.js services with their own builds and health checks.</dd></div>
-    <div><dt>Render background worker</dt><dd>A separate Node.js process runs BullMQ jobs while the API handles application requests.</dd></div>
-    <div><dt>Managed data services</dt><dd>Render Postgres stores application data. Render Key Value provides the Redis-compatible backend for BullMQ queues.</dd></div>
-  </dl>
+  <section class="deployment-section" id="deployment" aria-labelledby="deployment-title">
+    <h3 id="deployment-title">Deployment infrastructure</h3>
+    <p class="architecture-intro">In staging, Render hosts the coach’s web app and the backend. The Expo client app is built separately with EAS and connects to the same NestJS API.</p>
+    <figure class="deployment-diagram" aria-labelledby="deployment-title">
+      <div class="deployment-edges">
+        <div class="deployment-edge">
+          <div class="deployment-node">
+            <small>Client device · Expo EAS build</small>
+            <strong>Expo + React Native</strong>
+            <span>Client training and progress</span>
+          </div>
+          <p class="deployment-connection">Connects to the NestJS API over HTTPS</p>
+        </div>
+        <div class="deployment-edge">
+          <div class="deployment-node">
+            <small>Third-party services</small>
+            <strong>External providers</strong>
+            <span>Stripe, Twilio, Google, Meta / Instagram, OpenAI and ElevenLabs</span>
+          </div>
+          <p class="deployment-connection">Connect through provider APIs and webhooks</p>
+        </div>
+      </div>
+      <div class="deployment-render">
+        <h4>Render <span>Staging</span></h4>
+        <div class="deployment-processes">
+          <div class="deployment-node">
+            <small>Web service · Coach experience</small>
+            <strong>Next.js + React</strong>
+            <span>Serves the coach workspace</span>
+          </div>
+          <div class="deployment-https">HTTPS <span aria-hidden="true">→</span><span aria-hidden="true">↓</span></div>
+          <div class="deployment-node deployment-api">
+            <small>API service · Application layer</small>
+            <strong>NestJS API</strong>
+            <span>Handles web and mobile requests, workflow events and incoming webhooks</span>
+          </div>
+          <div class="deployment-node">
+            <small>Background worker</small>
+            <strong>Node.js worker</strong>
+            <span>Processes BullMQ jobs and runs scheduled workflow steps</span>
+          </div>
+        </div>
+        <p class="deployment-connection deployment-shared">API and worker share these services <span aria-hidden="true">↓</span></p>
+        <div class="deployment-storage">
+          <div class="deployment-node">
+            <small>Managed database</small>
+            <strong>Render Postgres</strong>
+            <span>Stores records and workflow progress. The API and worker access it through Prisma.</span>
+          </div>
+          <div class="deployment-node">
+            <small>Managed queue storage</small>
+            <strong>Render Key Value</strong>
+            <span>Redis-compatible storage for BullMQ jobs</span>
+          </div>
+        </div>
+      </div>
+      <figcaption>Render builds the web service, API, and worker separately. The web and API services have their own health checks.</figcaption>
+    </figure>
+  </section>
 </section>
 </section>
 </main>
