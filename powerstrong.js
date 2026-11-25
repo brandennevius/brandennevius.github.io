@@ -22,6 +22,9 @@
       });
     });
   });
+  document.querySelectorAll('[data-open-tab]').forEach(link => {
+    link.addEventListener('click', () => document.getElementById(link.dataset.openTab)?.click());
+  });
   const dialog = document.getElementById('screen-dialog');
   const enlarged = document.getElementById('screen-image');
   const caption = document.getElementById('screen-caption');
