@@ -260,3 +260,8 @@
   html:has(.product-nav) { scroll-padding-top: 156px; }
   .product-nav nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+.tour-section .tour-panel { align-items: start; }
+.tour-section .tour-copy h3 { margin-top: 0; }
+.tour-frames { display: grid; gap: clamp(24px, 4vw, 44px); min-width: 0; }
+.tour-frames figcaption { margin-top: 10px; }
