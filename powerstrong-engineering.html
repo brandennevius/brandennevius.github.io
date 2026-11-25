@@ -48,7 +48,7 @@
     <li><h3>Unit &amp; integration tests</h3><p>Check individual rules in isolation and verify that components work together across service and data boundaries.</p></li>
     <li><h3>End-to-end tests</h3><p>Use Playwright to exercise complete user journeys in the browser and verify the outcomes users should see.</p></li>
     <li><h3>User verification</h3><p>Walk through realistic scenarios with my cofounder in staging. Confirm the result fits how the team works and address feedback before release.</p></li>
-    <li><h3>Release</h3><p>Deploy the reviewed change and run a smoke check in the live environment.</p></li>
+    <li><h3>Release</h3><p>Use regression checks to review changes before merge. Deploy from the release branch and smoke-test the hosted app.</p></li>
   </ol>
   <a class="quiet-link" href="#verification">See the worked example ↓</a>
 </section>
@@ -119,7 +119,11 @@ if (await rows.count() !== 3) throw new Error('Expected three execution records'
     </li>
     <li id="release">
       <h3>Release</h3>
-      <p>The walkthrough is published on GitHub Pages.</p>
+      <dl class="workflow-cases">
+        <div><dt>GitHub regression checks</dt><dd>The repository contains Jest and Vitest tests and a Playwright browser smoke test. The plan is to run regression checks in GitHub Actions on each push to a pull request branch and require passing checks before merging into <code>main</code>.</dd></div>
+        <div><dt>Render deployment</dt><dd>The Render Blueprint enables automatic deploys for the web app, API, and background worker when relevant files change on the linked branch. With <code>main</code> linked, a merge can trigger deployment. Render uses configured health checks for the web app and API. After deployment, smoke-test key paths in the hosted app.</dd></div>
+      </dl>
+      <p>This walkthrough is published separately on GitHub Pages.</p>
       <p><a class="quiet-link" href="https://github.com/brandennevius/brandennevius.github.io/commits/main/">Portfolio release history →</a></p>
     </li>
   </ol>
@@ -142,6 +146,12 @@ if (await rows.count() !== 3) throw new Error('Expected three execution records'
       <p>Provider integrations connect payments, messaging, calendars, and AI to the workspace. For example, the billing service verifies signed Stripe webhooks and reconciles purchases with the matching contact and offer.</p>
     </article>
   </div>
+  <h3>Deployment infrastructure</h3>
+  <dl class="workflow-cases">
+    <div><dt>Render web services</dt><dd>Next.js and NestJS run as separate Node.js services with their own builds and health checks.</dd></div>
+    <div><dt>Render background worker</dt><dd>A separate Node.js process runs BullMQ jobs while the API handles application requests.</dd></div>
+    <div><dt>Managed data services</dt><dd>Render Postgres stores application data. Render Key Value provides the Redis-compatible backend for BullMQ queues.</dd></div>
+  </dl>
 </section>
 </section>
 </main>
