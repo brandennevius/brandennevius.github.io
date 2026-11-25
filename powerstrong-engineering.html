@@ -6,7 +6,7 @@
   <title>PowerStrongAI Engineering | Branden Nevius</title>
   <meta name="description" content="Architecture and workflow verification for PowerStrongAI, an independent coaching platform by Branden Nevius.">
   <meta name="theme-color" content="#192e25">
-  <link rel="stylesheet" href="powerstrong.css?v=20261124-architecture">
+  <link rel="stylesheet" href="powerstrong.css?v=20261124-platform-architecture">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -126,16 +126,22 @@ if (await rows.count() !== 3) throw new Error('Expected three execution records'
 </section>
 <section class="engineering-architecture" id="architecture" aria-labelledby="architecture-title">
   <h2 id="architecture-title">System architecture</h2>
-  <p class="architecture-intro">Coaches work in a Next.js web app and clients train in an Expo mobile app. Both use the same NestJS API, which applies workspace permissions and keeps records tied to the tenant that owns them.</p>
+  <p class="architecture-intro">PowerStrongAI connects the coach’s web workspace and the client’s mobile app through a shared API. The platform brings CRM, messaging, billing, and training together around the same client records.</p>
   <div class="architecture" aria-label="Application architecture"><div class="arch-experiences"><div><small>COACH EXPERIENCE</small><strong>Next.js + React</strong><span>Workspace operations</span></div><div><small>CLIENT EXPERIENCE</small><strong>Expo + React Native</strong><span>Training and progress</span></div></div><div class="arch-bridge">Shared API and domain context</div><div class="arch-api"><small>APPLICATION LAYER</small><strong>NestJS API</strong><span>JWT authentication · roles · entitlements · tenant-scoped services</span></div><div class="arch-foundations"><div><strong>PostgreSQL + Prisma</strong><span>Relationships, purchases, programs, and session records</span></div><div><strong>Redis + BullMQ</strong><span>Message, scoring, and transcription jobs</span></div><div><strong>Workflow engine</strong><span>Event enrollments and persisted scheduled steps</span></div></div><div class="providers"><span>Stripe</span><span>Twilio</span><span>Google</span><span>Meta / Instagram</span><span>OpenAI</span><span>ElevenLabs</span></div></div>
-  <h3 class="architecture-flow-title">How an intake reaches the coach</h3>
-  <ol class="process-stages architecture-flow">
-    <li><h4>Save the submission</h4><p>The API checks the public form’s required fields, finds or creates the contact, and stores the answers under that workspace.</p></li>
-    <li><h4>Match the trigger</h4><p>The workflow engine looks for active workflows configured for that form. A match enrolls the contact and starts the ordered actions.</p></li>
-    <li><h4>Record the results</h4><p>The engine saves each step’s status in PostgreSQL. The app reads those records to show the timeline alongside the updated contact and assigned task.</p></li>
-  </ol>
-  <p class="architecture-intro">The engine also stores delayed steps with a scheduled time so a poller can pick them up later. Redis and BullMQ handle background jobs such as message delivery, lead scoring, and transcription.</p>
-  <div class="engineering-grid"><article><h3 class="eyebrow">TENANCY &amp; AI</h3><p>Workspace context follows requests through role and entitlement guards into explicitly tenant-scoped services. Copilot tools operate within that same application context.</p></article><article><h3 class="eyebrow">PAYMENTS &amp; EVENTS</h3><p>Signed Stripe webhooks, duplicate-event checks, and purchase reconciliation paths connect provider events to workspace records and downstream workflows.</p></article><article><h3 class="eyebrow">PROGRAM LIFECYCLES</h3><p>Templates, client assignments, and completed workouts have separate lifecycles. Replacement and synchronization rules account for session progress and locks.</p></article></div>
+  <div class="engineering-grid">
+    <article>
+      <h3 class="eyebrow">WORKSPACE ISOLATION</h3>
+      <p>The API checks workspace membership, roles, and entitlements. Coaches, clients, and Copilot tools access records through services that scope requests to a workspace.</p>
+    </article>
+    <article>
+      <h3 class="eyebrow">BACKGROUND PROCESSING</h3>
+      <p>PostgreSQL stores application records and workflow progress. The workflow engine saves scheduled actions for later execution, while Redis and BullMQ handle jobs such as message delivery, lead scoring, and transcription.</p>
+    </article>
+    <article>
+      <h3 class="eyebrow">EXTERNAL INTEGRATIONS</h3>
+      <p>Provider integrations connect payments, messaging, calendars, and AI to the workspace. For example, the billing service verifies signed Stripe webhooks and reconciles purchases with the matching contact and offer.</p>
+    </article>
+  </div>
 </section>
 </section>
 </main>
